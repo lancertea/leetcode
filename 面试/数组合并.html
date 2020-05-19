@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数组合并</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var combine = function (arr, brr) {
+            let aobj = new Map(),
+                bobj = new Map();
+            arr.sort((a, b) => a - b).forEach(num => {
+                aobj.set(num, aobj.has(num) ? aobj.get(num) + 1 : 1);
+            });
+            brr.sort((a, b) => a - b).forEach(num => {
+                bobj.set(num, bobj.has(num) ? bobj.get(num) + 1 : 1);
+            });
+            let res = [],
+                tmp = [];
+            while (arr.length && brr.length) {
+                if (arr[0] < brr[0]) {
+                    tmp = arr.splice(0, aobj.get(arr[0]));
+                    res = res.concat(tmp);
+                } else if (arr[0] > brr[0]) {
+                    tmp = brr.splice(0, bobj.get(brr[0]));
+                    res = res.concat(tmp);
+                } else {
+                    if (aobj.get(arr[0]) > bobj.get(brr[0])) {
+                        tmp = arr.splice(0, aobj.get(arr[0]));
+                        res = res.concat(tmp);
+                        brr.splice(0, bobj.get(brr[0]));
+                    } else {
+                        tmp = brr.splice(0, bobj.get(brr[0]));
+                        res = res.concat(tmp);
+                        arr.splice(0, aobj.get(arr[0]));
+                    }
+                }
+            }
+            return res.concat(arr, brr);
+        }
+        let a = [1, 2, 3, 2, 2, 4];
+        let b = [1, 1, 3, 4, 6, 5, 2, 3];
+        console.log(combine(a, b));
+    </script>
+    <!-- 
+     字节二面
+
+     题目描述：
+   let a=[1,2,3,2,2,4]
+   let b=[1,1,3,4,6,5,2,3]
+   合并并排序两个数组，如果两数组中有相同的数字，则以出现次数多的那个为主
+
+     -->
+</body>
+
+</html>

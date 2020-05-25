@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>验证回文串</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+      function reverString(str){
+      str=str.replace(/(\s|[^a-zA-Z0-9])/g,'');
+      let arr=str.split("").map(item=>item.toLowerCase()),
+      left=0,right=arr.length-1;
+      while(left<=right){
+      if(arr[left]===arr[right]){
+          left++;
+          right--;
+      }else return false;
+      }
+    
+      return true;
+      }
+
+      let str1="A man, a plan, a canal: Panama";
+      console.log(reverString(str1));
+
+      let str2="race a car";
+      console.log(reverString(str2));
+
+
+      function reverString1(str){
+      str=str.replace(/(\s|[^a-zA-Z0-9])/g,'');
+      let arr=str.split("").map(item=>item.toLowerCase());
+      return arr.join("")===arr.reverse().join("");
+      }
+
+      
+      console.log(reverString1(str1));
+      console.log(reverString1(str2));
+      
+      
+    </script>
+    <!-- 
+     题目描述：
+   给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+
+
+    示例：
+    input:  "A man, a plan, a canal: Panama"
+    output:true
+
+    input:  "race a car"
+    output:false
+
+     -->
+</body>
+
+</html>

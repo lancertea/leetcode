@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>最长回文子串</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        //解法1：暴力枚举法
+        function longestPalindrome(s) {
+            let isPalindrome = function (s) {
+                return s === s.split("").reverse().join("");
+            };
+            let res = '',
+                max = 0,
+                len = s.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = i + 1; j <= len; j++) {
+                    let tmp = s.substring(i, j);
+                    if (isPalindrome(tmp) && tmp.length > max) {
+                        res = tmp;
+                        max = tmp.length;
+                    }
+                }
+            }
+            return res;
+        }
+
+        let s1 = 'babad';
+        console.log(longestPalindrome(s1));
+        let s2 = 'cbbd'
+        console.log(longestPalindrome(s2));
+
+        //解法2：中心扩展法
+        function longestPalindrome1(s) {
+            if (!s || s.length < 2) return s;
+            let start = 0,
+                end = 0,
+                n = s.length;
+            let centerExtend = (left, right) => {
+                while (left >= 0 && right < n && s[left] === s[right]) {
+                    left--;
+                    right++;
+                }
+                return right - left - 1;
+            }
+            for (let i = 0; i < n; i++) {
+                let len1 = centerExtend(i, i),
+                    len2 = centerExtend(i, i + 1),
+                    maxLen = Math.max(len1, len2);
+                if (maxLen > end - start) {
+                    start = i - ((maxLen - 1) >> 1);
+                    end = i + (maxLen >> 1);
+                }
+            }
+            return s.substring(start, end + 1);
+        }
+        console.log(longestPalindrome1(s1));
+        console.log(longestPalindrome1(s2));
+
+    </script>
+    <!-- 
+     题目描述：
+   给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+
+
+    示例：
+    input:  "babad"
+    output: "bab"|"aba"
+
+    input:  "cbbd"
+    output: "bb"
+
+     -->
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>过滤字符串</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        var tree = [{
+                name: 'A'
+            },
+            {
+                name: 'B',
+                children: [{
+                        name: 'A'
+                    },
+                    {
+                        name: 'AA'
+                    }
+                ]
+            },
+            {
+                name: 'C'
+            }
+        ];
+
+        var arr=[1,2,3,4];
+        // tree是一个数组
+        // str = 'A'
+        // 返回[{
+        //     name: 'A'
+        // }, {
+        //     name: 'B',
+        //     children: [{
+        //             name: 'A'
+        //         },
+        //         {
+        //             name: 'AA'
+        //         }
+        //     ]
+        // }]
+
+        // str = 'B'
+        // 返回[{
+        //     name: 'n',
+        //     children: [{
+        //             name: 'A'
+        //         },
+        //         {
+        //             name: 'AA'
+        //         }
+        //     ]
+        // }]
+        // str = 'C'
+        // 返回[{
+        //     name: 'C'
+        // }]
+        // 返回新树，不能改变原有树
+
+        function filter(tree, str) {
+            let newtree = []
+            for (let item of tree) {
+                if (item.name === str) {
+                    newtree.push(item)
+                } else {
+                    if (item.children && item.children.length > 0) {
+                        let result = filter(item.children, str)
+                        if (result) {
+                            newtree.push(item)
+                        }
+                    }
+                }
+            }
+            return newtree
+        }
+        for(let item of tree){
+            console.log(item);
+            
+        }
+        for(let item of arr){
+            console.log(item);
+            
+        }
+        
+        console.log(filter(tree,'A'));
+        
+    </script>
+    <!-- 
+     深信服
+     -->
+</body>
+
+</html>

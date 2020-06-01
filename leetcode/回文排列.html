@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>回文排列</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        var canPermutePalindrome = function (s) {
+            s = s.split("").sort((a, b) => a.localeCompare(b)).join("");
+            let arr = s.match(/([a-zA-Z])\1*/g),
+                count = arr.map(item => item.length);
+            let res = 0;
+            for (let i = 0; i < count.length; i++) {
+                if (count[i] % 2 !== 0) {
+                    res++;
+                    if (res > 1) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
+
+        //易错点：这种无法解决'abca'这种情况
+        // let arr = s.split("");
+        // arr = arr.filter(item => {
+        //     return arr.indexOf(item) === arr.lastIndexOf(item);
+        // });
+
+        let str = "tactcoa";
+        console.log(canPermutePalindrome(str));
+        let str1 = "abcacaddba"
+        console.log(canPermutePalindrome(str1));
+
+        var canPermutePalindrome1 = function (s) {
+            let m = new Map(),
+                res = 0;
+            let arr = s.split("");
+            arr.forEach(item => {
+                m.set(item, m.has(item) ? m.get(item) + 1 : 1);
+            });
+            let count = [...m.values()];
+            for (let i = 0; i < count.length; i++) {
+                if (count[i] % 2 !== 0) {
+                    res++;
+                    if (res > 1) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
+        console.log(canPermutePalindrome1(str));
+    </script>
+    <!-- 
+     题目描述：
+   给定一个字符串，编写一个函数判定其是否为某个回文串的排列之一。
+   回文串是指正反两个方向都一样的单词或短语。排列是指字母的重新排列。回文串不一定是字典当中的单词。
+
+    示例：
+    input:  "tactcoa"
+    output:  true（排列有"tacocat"、"atcocta"，等等）
+
+     -->
+</body>
+
+</html>

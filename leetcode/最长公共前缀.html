@@ -12,6 +12,7 @@
 <body>
 
     <script>
+        //解法1：逐个比较，从前往后两两比较字符串，获取公共前缀
         var longestCommonPrefix = function (strs) {
             if (strs.length === 0) {
                 return "";
@@ -29,9 +30,60 @@
             }
             return ans;
         };
+        
+        //解法2：仅需最大、最小字符串的最长公共前缀
+        var longestCommonPrefix1 = function (strs) {
+            if (!strs || strs.length === 0) return "";
+            if (strs.length === 1) return strs[0];
+            let min = 0,
+                max = 0;
+            for (let i = 1; i < strs.length; i++) {
+                if (strs[min] > strs[i]) min = i;
+                if (strs[max] < strs[i]) max = i;
+            }
+            for (let j = 0; j < strs[min].length; j++) {
+                if (strs[min][j] !== strs[max][j]) {
+                    return strs[min].slice(0, j);
+                }
+            }
+            return strs[min];
+        };
 
-        let strs = ["flower", "flow", "flight"]
+        //解法3：分治策略，归并思想
+        var longestCommonPrefix2 = function (strs) {
+        if(!strs||strs.length===0) return "";
+        return lCPrefixRec(strs);
+        }
+
+        function lCPrefixRec(arr){
+        let len=arr.length;
+        if(len===1)
+        return arr[0];
+        let mid=Math.floor(len/2),
+            left=arr.slice(0,mid),
+            right=arr.slice(mid);
+        return lCPrefixTwo(lCPrefixRec(left),lCPrefixRec(right));
+        }
+
+        function lCPrefixTwo(str1,str2){
+        let j=0;
+        for(;j<str1.length&&j<str2.length;j++){
+        if(str1[j]!==str2[j])
+        break;
+        }
+        return str1.slice(0,j);
+        }
+
+        let strs = ["flower", "flow", "flight"];
         console.log(longestCommonPrefix(strs));
+        let strs1 = ["dog", "racecar", "car"];
+        console.log(longestCommonPrefix(strs1));
+
+        console.log(longestCommonPrefix1(strs));
+        console.log(longestCommonPrefix1(strs1));
+
+        console.log(longestCommonPrefix2(strs));
+        console.log(longestCommonPrefix2(strs1));
     </script>
     <!-- 
      题目描述：

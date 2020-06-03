@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>连续1的个数</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        function longNum(arr) {
+            let count = 0,
+                max = 0;
+            arr.forEach(item => {
+                if (item === 1) {
+                    count++;
+                    if (count > max) {
+                        max = count;
+                    }
+                } else {
+                    count = 0;
+                }
+            });
+            return max;
+        }
+
+        let arr = [1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0];
+        console.log(longNum(arr));
+    </script>
+    <!-- 
+     深信服
+     数组[1,0,0,1,1,1,…0],找出数组中连续1的最大长度
+     -->
+</body>
+
+</html>

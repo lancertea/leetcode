@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>按月分类</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        let data = [{
+                date: '2020-05-01',
+                detial: {}
+            },
+            {
+                date: '2020-06-01',
+                detial: {}
+            },
+            {
+                date: '2020-05-01',
+                detial: {}
+            }
+        ]
+        // 实现一个函数，将数据按月分类。 注意：数据的时间不连续 processDate(data) 
+        //{'2020-05': [{}, {}], '2020-06': [{}] } 
+
+        function processDate(data) {
+            let obj = {};
+            for (let item of data) {
+                let key = item.date.slice(0, 7);
+                if (!obj[key]) {
+                    obj[key] = [];
+                    obj[key].push(item.detial);
+                } else {
+                    obj[key].push(item.detial);
+                }
+            }
+            return obj;
+        }
+
+        console.log(processDate(data));
+        
+    </script>
+    <!-- 
+     深信服
+     -->
+</body>
+
+</html>

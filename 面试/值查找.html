@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>值查找</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        function getValueByPath(obj, path, symbol = '/') {
+            let parr = path.split(symbol),
+                tmp = obj[parr[0]];
+            for (let i = 1; i < parr.length; i++) {
+                if (tmp) {
+                    tmp = tmp[parr[i]];
+                } else {
+                    return undefined;
+                }
+            }
+            return tmp;
+        }
+
+
+        let obj1 = {
+            a: {
+                b: 1
+            }
+        };
+        let path1 = 'a/b';
+        console.log(getValueByPath(obj1, path1)); // 1
+
+        let obj2 = {
+            foo: [{
+                bar: 2
+            }]
+        }
+        let path2 = 'foo/0/bar';
+        console.log( getValueByPath(obj2, path2) );// 2
+
+        let path3 = 'a/b/c/d';
+        console.log(getValueByPath(obj2, path3));// undefined (路径不存在)
+    </script>
+    <!-- 
+    深信服二面
+    
+/**
+ * 现一个值查找函数，返回一个对象或者数组指定路径上的值。
+ * 要求不能使用递归
+ * @param {object | array} obj 被查找的对象
+ * @param {string} path  
+ * @param {string} [symbol='/'] 路径分隔符
+ */
+function getValueByPath (obj, path, symbol='/') {
+}
+
+let obj1 = {a: {b: 1}};
+let path1 = 'a/b';
+getValueByPath(obj1, path1); // 1
+
+let obj2 = {foo: [{bar: 2}]}
+let path2 = 'foo/0/bar';
+getValueByPath(obj2, path2) // 2
+
+let path3 = 'a/b/c/d';
+getValueByPath(obj2, path3) // undefined (路径不存在)
+     -->
+</body>
+
+</html>

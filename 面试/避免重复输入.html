@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>避免重复输入</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        function cached(fn) {
+            let map = new Map();
+
+            return function () {
+                let n = [...arguments][0];
+                if (!map.has(n)) {
+                    let res = fn(n);
+                    map.set(n, res);
+                    return res;
+                }
+                return map.get(n);
+            }
+        }
+
+
+        function sum(n) {
+            console.log("compute sum of 1-" + n)
+            let sum = 0
+            for (let i = 1; i < n; i++) {
+                sum += i
+            }
+            return sum
+        }
+
+        //sum(5) // compute sum of 1-5
+        //sum(5) // compute sum of 1-5
+
+        const cachedSum = cached(sum)
+        cachedSum(5) // compute sum of 1-5
+        cachedSum(5) // 不会再次执行 sum 方法
+        cachedSum(6) // compute sum of 1-6
+    </script>
+    <!-- 
+shopee
+
+一个函数让相同的输入不会触发两次
+function cached (fn) {
+   
+}
+
+function sum (n) {
+    console.log("compute sum of 1-"+n)
+    let sum = 0
+    for (let i = 1; i < n; i++) {
+        sum += i
+    }
+    return sum
+}
+
+sum(5) // compute sum of 1-5
+sum(5) // compute sum of 1-5
+
+const cachedSum = cached(sum)
+cachedSum(5) // compute sum of 1-5
+cachedSum(5) // 不会再次执行 sum 方法
+cachedSum(6) // compute sum of 1-6
+-->
+</body>
+
+</html>

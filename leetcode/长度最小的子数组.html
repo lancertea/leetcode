@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>长度最小的子数组</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+    let s=7,
+    nums=[2,3,1,2,4,3];
+
+    var minSubArrayLen = function(s,nums){
+        let len = nums.length,
+            minLen=len+1,
+            i=0,
+            j=0,
+            sum=0;
+            while(i<len){
+                sum+=nums[i];
+                while(sum>=s){
+                    minLen=Math.min(minLen,i-j+1);
+                    sum-=nums[j];
+                    j++;
+                }
+                i++;
+            }
+            return minLen===len+1?0:minLen;
+    };
+
+    console.log(minSubArrayLen(s,nums));
+      
+    </script>
+    <!-- 
+     题目描述：
+   给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的 连续 子数组，并返回其长度。如果不存在符合条件的子数组，返回 0。
+
+
+    示例：
+    input: s = 7, nums = [2,3,1,2,4,3]
+    output:2 //[4,3]
+     -->
+</body>
+
+</html>

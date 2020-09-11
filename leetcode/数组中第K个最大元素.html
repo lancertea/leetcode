@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>数组中第K个最大元素</title>
+</head>
+
+<body>
+    <script>
+        let a = [5, 2, 6, 2, 9, 10, 5];
+        let b = [3, 1, 6, 2, 5, 8, 4, 7];
+        quick(a, 0, a.length - 1);
+        console.log(a);
+        quick(b, 0, b.length - 1);
+        console.log(b);
+
+        // function quick(a, left, right) {
+        //     if (left === right) return;
+        //     let mid = part(a, left, right);
+        //     if (left < mid) {
+        //         quick(a, left, mid - 1);
+        //     }
+        //     if (mid < right) {
+        //         quick(a, mid + 1, right);
+        //     }
+        // }
+
+        // function part(a, left, right) {
+        //     let key = a[left];
+        //     while (left < right) {
+        //         while (key <= a[right] && left < right) {
+        //             right--;
+        //         }
+        //         [a[left], a[right]] = [a[right], a[left]];
+        //         while (key >= a[left] && left < right) {
+        //             left++;
+        //         }
+        //         [a[left], a[right]] = [a[right], a[left]];
+        //     }
+        //     return left;
+        // }
+
+        let findKthLargest = function (nums, k) {
+            return quickSelect(nums, nums.length - k)
+        };
+
+        let quickSelect = (arr, k) => {
+            return quick(arr, 0, arr.length - 1, k)
+        }
+
+        let quick = (arr, left, right, k) => {
+            let index
+            if (left < right) {
+                // 划分数组
+                index = partition(arr, left, right)
+                // Top k
+                if (k === index) {
+                    return arr[index]
+                } else if (k < index) {
+                    // Top k 在左边
+                    return quick(arr, left, index - 1, k)
+                } else {
+                    // Top k 在右边
+                    return quick(arr, index + 1, right, k)
+                }
+            }
+            return arr[left]
+        }
+
+        let partition = (arr, left, right) => {
+            // 取中间项为基准
+            var datum = arr[Math.floor(Math.random() * (right - left + 1)) + left],
+                i = left,
+                j = right
+            // 开始调整
+            while (i < j) {
+
+                // 左指针右移
+                while (arr[i] < datum) {
+                    i++
+                }
+
+                // 右指针左移
+                while (arr[j] > datum) {
+                    j--
+                }
+
+                // 交换
+                if (i < j) swap(arr, i, j)
+
+                // 当数组中存在重复数据时，即都为datum，但位置不同
+                // 继续递增i，防止死循环
+                if (arr[i] === arr[j] && i !== j) {
+                    i++
+                }
+            }
+            return i
+        }
+
+        // 交换
+        let swap = (arr, i, j) => {
+            let temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>验证二叉搜索树</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        const helper = (root, lower, upper) => {
+            if (root === null) return true;
+            if (root.val <= lower || root.val >= upper) return false;
+            return helper(root.left, lower, root.val) && helper(root.right, root.val, upper);
+        }
+        var isValidBST = function (root) {
+            return helper(root, -Infinity, Infinity);
+        };
+
+        var isValidBST1 = function (root) {
+            let stack = [];
+            let inorder = -Infinity;
+
+            while (stack.length || root !== null) {
+                while (root !== null) {
+                    stack.push(root);
+                    root = root.left;
+                }
+                root = stack.pop();
+                // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+                if (root.val <= inorder) return false;
+                inorder = root.val;
+                root = root.right;
+            }
+            return true;
+        };
+    </script>
+    <!-- 
+     题目描述：
+   给定一个二叉树, 找到该树中两个指定节点的最近公共祖先
+     -->
+</body>
+
+</html>

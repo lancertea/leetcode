@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>验证回文字符串Ⅱ</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        /*
+判断是否是回文串，用「双指针」的思路肯定没错
+设置头尾指针，如果双指针指向的字符相同，指针往中间挪动，继续检查
+如果指向的字符不同，看看能否通过删除一个字符（要么删左指针指向的字符，要么删右指针指向的字符），使得剩下的字串仍是回文串
+写一个判断回文串的辅助函数，判断「删去一个字符后的子串」是否是回文串
+辅助函数的双指针在循环时，如果字符不同，就一票否决，不像上面那样给机会
+*/
+        function isPali(str, l, r) { // 辅助函数
+            while (l < r) { // 指针相遇 结束循环
+                if (str[l] !== str[r]) { // 一票否决
+                    return false;
+                }
+                l++; // 指针挪动，相互逼近
+                r--;
+            }
+            return true; // 没有遇到不同，返回true
+        }
+        var validPalindrome = function (str) {
+            let l = 0,
+                r = str.length - 1; // 头尾指针
+            while (l < r) {
+                if (str[l] !== str[r]) { // 转为判断删掉字符后的字串，是否是回文串
+                    return isPali(str, l + 1, r) || isPali(str, l, r - 1);
+                }
+                l++;
+                r--;
+            }
+            return true;
+        };
+    </script>
+    <!-- 
+     题目描述：
+   给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+
+
+    示例：
+    input:  "A man, a plan, a canal: Panama"
+    output:true
+
+    input:  "race a car"
+    output:false
+
+     -->
+</body>
+
+</html>

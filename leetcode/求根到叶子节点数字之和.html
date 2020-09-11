@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>求根到叶子节点数字之和</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+     //递归遍历二叉树，同时记录路径数值，遇到叶子节点计算路径和。
+        var sumNumbers = function (root) {
+            if (!root) return 0
+            let sum = 0
+            recurse(root, 0)
+            return sum
+
+            function recurse(root, cur) {
+                cur = cur * 10 + root.val
+                if (!root.left && !root.right) sum += cur
+                if (root.left) recurse(root.left, cur)
+                if (root.right) recurse(root.right, cur)
+            }
+        };
+    </script>
+    <!-- 
+     给定一个二叉树，它的每个结点都存放一个 0-9 的数字，每条从根到叶子节点的路径都代表一个数字。
+     例如，从根到叶子节点路径 1->2->3 代表数字 123。
+     计算从根到叶子节点生成的所有数字之和。
+
+
+    示例：
+    input: [1,2,3]
+    output:25
+
+    input: [4,9,0,5,1]
+    output:1026
+
+
+     -->
+</body>
+
+</html>

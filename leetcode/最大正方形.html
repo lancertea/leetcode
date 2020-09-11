@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>最大正方形</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        /*
+找出最大正方形 => 找出最大边长 遍历每一项，1 必然在一个正方形中。0 则不在正方形中
+dp[ i ][ j ] : 以 (i, j) 为 右下顶点 所能形成的最大正方形的边长
+maxSideLength 变量保存最大的正方形边长
+base case
+第 1 行和第 1 列的 '1' 坐标对应的 dp[ i ][ j ] 只能为 1
+求归纳通式
+(i, j) 坐标为右下角所能形成的最大正方形的边长，取决于它左边、上方、斜上方的项所能形成的最大正方形的边长，为三者的最小值 + 自身的长度 1
+有了base case和递推公式，可以将 dp 二维数组的每一项逐个求出
+每次遍历，将求得的 dp[i][j] 与 maxSideLength 比较，尝试更新它
+最后返回maxSideLength的平方，求出最大正方形的面积
+ */
+        var maximalSquare = function (matrix) {
+            let maxSideLength = 0 // 相当于纪录保持者
+            let dp = new Array(matrix.length) // 构建dp数组
+            for (let i = 0; i < matrix.length; i++) {
+                dp[i] = new Array(matrix[i].length).fill(0) // dp二维数组，每一项初始化0
+                for (let j = 0; j < matrix[i].length; j++) {
+                    if (matrix[i][j] === '1') {
+                        if (i === 0 || j === 0) { // base case
+                            dp[i][j] = 1 // 第一列和第一行的dp值只能为1
+                        } else { // 递推通式，求出dp[i][j]
+                            dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
+                        }
+                        maxSideLength = Math.max(maxSideLength, dp[i][j]) //挑战纪录保持者，试图更新
+                    }
+                }
+            }
+            return maxSideLength * maxSideLength // 边长的平方
+        };
+    </script>
+    <!-- 
+     题目描述：
+   给定一个二叉树, 找到该树中两个指定节点的最近公共祖先
+     -->
+</body>
+
+</html>

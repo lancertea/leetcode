@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>二叉树前序遍历</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        //递归实现
+        function pre(root, res = []) {
+            if (root) {
+                res.push(root.val);
+                pre(root.left, res);
+                pre(root.right, res);
+            }
+            return res;
+        }
+
+        //非递归实现
+        function pre1(root) {
+            let res = [],
+                stack = [],
+                cur = root;
+            while (cur || stack.length) {
+                while (cur) {
+                    res.push(cur.val);
+                    stack.push(cur);
+                    cur = cur.left;
+                }
+                cur = stack.pop();
+                cur = cur.right;
+            }
+            return res;
+
+        }
+
+        // 时间复杂度O(n)   空间复杂度O(h)  n为二叉树节点个数，h为二叉树深度
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>二叉树中序遍历</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        
+        //递归实现
+        function mid(root, res = []) {
+            if (root) {
+                mid(root.left, res);
+                res.push(root.val);
+                mid(root.right, res);
+            }
+            return res;
+        }
+
+        //非递归实现
+        function mid1(root) {
+            let res = [],
+                stack = [],
+                cur = root;
+            while (cur || stack.length) {
+                while (cur) {
+                    stack.push(cur);
+                    cur = cur.left;
+                }
+                cur = stack.pop();
+                res.push(cur.val);
+                cur = cur.right;
+            }
+            return res;
+        }
+
+        // 时间复杂度O(n)   空间复杂度O(h)  n为二叉树节点个数，h为二叉树深度
+    </script>
+</body>
+
+</html>

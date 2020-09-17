@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>多米诺骨牌</title>
+</head>
+
+<body>
+    <script>
+        let s = ".L.R...LR..L..";
+        console.log(solution1(s));
+
+        function solution(s) {
+            let reg = /(L.R|R.L)/g;
+            while (reg.test(s)) {
+                s = s.replace(/L\.R/g, 'LAR');
+                s = s.replace(/R\.L/g, 'RAL');
+                s = s.replace(/\.L/g, 'LL');
+                s = s.replace(/R\./g, 'RR');
+            }
+            return s.replace(/A/g, '.');
+        }
+    </script>
+</body>R
+
+</html>

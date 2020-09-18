@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>两个链表的公共节点</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        //方法1：
+        // 我们使用两个指针 node1，node2 分别指向两个链表 headA，headB 的头结点，然后同时分别逐结点遍历，
+        //当 node1 到达链表 headA 的末尾时，重新定位到链表 headB 的头结点；当 node2 到达链表 headB 的末尾时，
+        //重新定位到链表 headA 的头结点。
+        // 这样，当它们相遇时，所指向的结点就是第一个公共结点。
+        var getIntersectionNode = function (headA, headB) { //双指针
+            let node1 = headA,
+                node2 = headB;
+            while (node1 != node2) {
+                node1 = node1 !== null ? node1.next : headB;
+                node2 = node2 !== null ? node2.next : headA;
+            }
+            return node1;
+        };
+        //方法二：
+        var getIntersectionNode = function (headA, headB) { //hashmap法
+            let map = new Map();
+            while (headA) {
+                map.set(headA, true);
+                headA = headA.next;
+            }
+            while (headB) {
+                if (map.has(headB)) return headB;
+                headB = headB.next;
+            }
+            return null;
+        };
+    </script>
+
+</body>
+
+</html>

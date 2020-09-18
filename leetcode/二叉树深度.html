@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>二叉树的深度</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        function TreeDepth(pRoot) {
+            //树的深度=左子树的深度和右子树深度中最大者+1
+            if (pRoot === null) return 0;
+            var leftDep = TreeDepth(pRoot.left);
+            var rightDep = TreeDepth(pRoot.right);
+            return Math.max(leftDep, rightDep) + 1;
+        }
+
+        //最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+        var minDepth = function (root) {
+            if (root == null) {
+                return 0;
+            }
+            if (root.left == null && root.right == null) {
+                return 1;
+            }
+            let ans = Infinity;
+            if (root.left != null) {
+                ans = Math.min(minDepth(root.left), ans);
+            }
+            if (root.right != null) {
+                ans = Math.min(minDepth(root.right), ans);
+            }
+            return ans + 1;
+        };
+    </script>
+
+</body>
+
+</html>

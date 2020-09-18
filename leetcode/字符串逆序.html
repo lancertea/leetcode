@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字符串逆序</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        //JavaScript 中可以使用 split 结合 数组自带的 reverse，先转成数组，再将数组拼接成字符串。
+        var str = 'abc';
+        var reverseStr = str.split('').reverse().join('');
+
+        //经过此操作 str 还是不变
+        //方法二：不使用API
+        var x = 501120;
+        var digit;
+        var ret = 0;
+        var count = [];
+        while (x > 0) {
+            digit = x % 10;
+            count.push(digit);
+            ret = ret * 10 + digit;
+            x = parseInt(x / 10);
+        }
+        console.log(count.join("")); //'021105' 字符串类型
+        console.log(ret); //21105 Number 类型
+    </script>
+    
+</body>
+
+</html>

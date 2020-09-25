@@ -24,6 +24,25 @@
             }
             return [];
         };
+
+        function FindGreatestSumOfSubArray(array) {
+            if (Array.isArray(array) && array.length > 0) {
+                let sum = array[0];
+                let max = array[0];
+                for (let i = 1; i < array.length; i++) {
+                    if (sum < 0) {
+                        sum = array[i];
+                    } else {
+                        sum = sum + array[i];
+                    }
+                    if (sum > max) {
+                        max = sum;
+                    }
+                }
+                return max;
+            }
+            return 0;
+        }
     </script>
 </body>
 </html>

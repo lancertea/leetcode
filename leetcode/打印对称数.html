@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>打印出1-10000之间的所有对称数</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        let res = [...Array(10000).keys()].filter((x) => {
+            return x.toString().length > 1 && x === Number(x.toString().split('').reverse().join(''))
+        })
+        console.log(res);
+
+        let arr = []
+        for (let i = 0; i < 10000; i++) {
+            if (i < 10) {
+                arr.push(i)
+            } else {
+                let str = i + ''
+                let middleIndex = parseInt(str.length / 2)
+                let left = str.slice(0, middleIndex)
+                let right = str.slice(middleIndex + (str.length % 2 == 0 ? 0 : 1)).split('').reverse().join('')
+                left === right && arr.push(i)
+            }
+        }
+
+        console.log(arr)
+    </script>
+    <!-- 
+     题目描述：
+   打印出1-10000之间的所有对称数
+
+     -->
+</body>
+
+</html>

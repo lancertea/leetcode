@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>二分查找</title>
+</head>
+<body>
+    <script>
+        //二分查找 arr为有序数组
+        function binary_search(nums, target) { //非递归
+            var left = 0;
+            var right = nums.length - 1;
+            while (left <= right) {
+                mid = left + parseInt((right - left) / 2);
+                if (target == nums[mid]) return mid;
+                if (target < nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return -1;
+        };
+
+        // 递归算法
+        function binary_search(arr, low, high, key) {
+            if (low > high) {
+                return -1;
+            }
+            var mid = parseInt((high + low) / 2);
+            if (arr[mid] == key) {
+                return mid;
+            } else if (arr[mid] > key) {
+                high = mid - 1;
+                return binary_search(arr, low, high, key);
+            } else if (arr[mid] < key) {
+                low = mid + 1;
+                return binary_search(arr, low, high, key);
+            }
+        };
+    </script>
+</body>
+
+</html>

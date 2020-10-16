@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>深拷贝+驼峰</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // 实现对象深拷贝 & key下划线转驼峰 ( a_bbb => aBbb、a_d_s => aDS )
+        const testData = {
+            a_bbb: 123,
+            a_g: [1, 2, 3, 4],
+            a_d: {
+                s: 2,
+                s_d: 3
+            },
+            a_f: [1, 2, 3, {
+                a_g: 5
+            }],
+            a_d_s: 1
+        }
+
+        console.log(deepClone(testData));
+        function deepClone(obj) {
+            if (typeof obj !== 'object' || obj === null) {
+                return obj;
+            }
+            let res;
+            if (obj instanceof Array) {
+                res = [];
+            } else {
+                res = {};
+            }
+
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    let k = key.replace(/_[a-z]/g, item =>
+                        item.slice(1).toUpperCase());
+                    res[k] = deepClone(obj[key]);
+                }
+            }
+
+            return res;
+        }
+    </script>
+    <!-- 
+    有赞
+     手写深度拷贝，并且把对象的属性改成驼峰类型
+     -->
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>按月分类</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        let t1 = '110000000000000000000000000000000000000000000000',
+            t2 = '110010000000000000000000000000000000000000000000';
+
+        function timeBitmapToRanges(time) {
+            let arr = time.split(""),
+                len = arr.length,
+                range = [],
+                point = 0,
+                count = 0;
+            for (let i = 0; i < len; i++) {
+                if (arr[i] === '1') {
+                    count++;
+                } else {
+                    if (count) {
+                        let s = point * 30,
+                            t = s + count * 30,
+                            sHour = Math.floor(s / 60).toString(),
+                            sMinute = (s % 60).toString(),
+                            tHour = Math.floor(t / 60).toString(),
+                            tMinute = (t % 60).toString(),
+                            start = (sHour.length < 2 ? '0' + sHour : sHour) + ':' + (sMinute.length < 2 ? '0' +
+                                sMinute :
+                                sMinute),
+                            end = (tHour.length < 2 ? '0' + tHour : tHour) + ':' + (tMinute.length < 2 ? '0' + tMinute :
+                                tMinute),
+                            str = start + '~' + end;
+                        range.push(str);
+                    }
+                    count = 0;
+                    point = i;
+                }
+            }
+            return range;
+        }
+
+        console.log(timeBitmapToRanges(t1));
+        console.log(timeBitmapToRanges(t2));
+    </script>
+    <!-- 
+    有赞
+     将一天24小时按每半小时划分成48段，我们用一个位图表示选中的时间区间，例如`110000000000000000000000000000000000000000000000`，
+     表示第一个半小时和第二个半小时被选中了，其余时间段都没有被选中，也就是对应00:00~01:00这个时间区间。一个位图中可能有多个不连续的
+     时间区间被选中，例如`110010000000000000000000000000000000000000000000`，表示00:00-1:00和02:00-02:30这两个时间区间被选中了。
+     要求：写一个函数timeBitmapToRanges，将上述规则描述的时间位图转换成一个选中时间区间的数组。
+
+     示例输入：`"110010000000000000000000000000000000000000000000"`
+     示例输出：`["00:00~01:00", "02:00~02:30"]`
+     -->
+</body>
+
+</html>

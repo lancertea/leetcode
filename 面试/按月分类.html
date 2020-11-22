@@ -34,16 +34,14 @@
                 let key = item.date.slice(0, 7);
                 if (!obj[key]) {
                     obj[key] = [];
-                    obj[key].push(item.detial);
-                } else {
-                    obj[key].push(item.detial);
                 }
+                obj[key].push(item.detial);
+
             }
             return obj;
         }
 
         console.log(processDate(data));
-        
     </script>
     <!-- 
      深信服

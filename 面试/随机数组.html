@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>随机数组</title>
+</head>
+
+<body>
+    <script>
+        console.log(rand(3, 12, 4));
+
+        function rand(min, max, N) {
+            if (N > (max - min - 1)) return [];
+            let arr = new Set();
+            while (arr.size < N) {
+                let item = Math.floor(Math.random * (max + 1));
+                if (item > min) {
+                    arr.add(item);
+                }
+            }
+
+            return [...new Set()];
+
+        }
+    </script>
+    <!-- 
+    滴滴
+    function rand(min, max, N)：生成长度是N，且在min、max内不重复的整数随机数组
+     -->
+</body>
+
+</html>

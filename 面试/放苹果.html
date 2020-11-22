@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>随机数组</title>
+</head>
+
+<body>
+    <script>
+        console.log(f(9,5));
+
+        function f(n, m) {
+            if (n <= 1 || m === 1) {
+                return 1;
+            } else if (m === 0) {
+                return 0;
+            } else if (m > n) {
+                return f(n, m - 1);
+            }
+            return f(n - m, m) + f(n, m - 1);
+
+        }
+    </script>
+    <!-- 
+    滴滴
+    n个同样的苹果放m个同样的盘子，允许有盘子空着, 问有多少种放法？
+
+    令f(n,m)表示n个苹果放到m个盘子里有多少种放法，下面分类讨论:
+    n<m时，至少有m-n个盘子空着(这些空盘子并不影响最后的结果，因为每种方法都带有着些空盘子)。只考虑m个苹果放m个盘子
+    f(n,m)=f(n,n)
+    n>m时,按是否有空盘子 分2种情况：
+           a.假设至少一个盘子空着，相当于f(n,m)=f(n,m-1)
+           b.所有的盘子都有苹果，假设每个盘子可以先放一个，问题就变成：n-m个苹果放到m个盘子，即f(n,m)=f(n-m,m)
+
+           总的放法为二者之和， f(n,m)=f(n,m-1)+f(n-m,m)
+
+     3. 临界条件
+
+          m=1时，所有苹果都放在同一个盘子里   f(n,m)=1
+          n=0时，没有苹果                    f(n,m)=1
+     -->
+</body>
+
+</html>

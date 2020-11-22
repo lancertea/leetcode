@@ -38,9 +38,61 @@
             return res.split("").reverse().join("");
         }
 
+        function sumStr(a, b) {
+            a = Number(a);
+            b = Number(b);
+            let arr = (a + b).toString().split("").reverse();
+            let m = 0,
+                res = '';
+            for (let i = 0; i < arr.length; i++) {
+                switch (m) {
+                    case 0: {
+                        switch (arr[i]) {
+                            case '0': {
+                                res += '0';
+                                break;
+                            }
+                            case '1': {
+                                res += '1';
+                                break;
+                            }
+                            case '2': {
+                                res += '0';
+                                m = 1;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 1: {
+                        switch (arr[i]) {
+                            case '0': {
+                                res += '1';
+                                m = 0;
+                                break;
+                            }
+                            case '1': {
+                                res += '0';
+                                break;
+                            }
+                            case '2': {
+                                res += '1';
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+
+            }
+            return m === 1 ? res += '1' : res;
+
+        }
+
         let a = '1010',
             b = '111';
         console.log(sum(a, b));
+        console.log(sumStr(a, b));
     </script>
     <!-- 
      字节一面

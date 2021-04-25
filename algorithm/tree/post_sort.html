@@ -14,8 +14,8 @@
         //递归实现
         function post(root, res = []) {
             if (root) {
-                mid(root.left, res);
-                mid(root.right, res);
+                post(root.left, res);
+                post(root.right, res);
                 res.push(root.val);
             }
             return res;

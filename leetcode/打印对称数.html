@@ -12,7 +12,7 @@
 <body>
     <script>
         let res = [...Array(10000).keys()].filter((x) => {
-            return x.toString().length > 1 && x === Number(x.toString().split('').reverse().join(''))
+            return x.toString().length > 0 && x === Number(x.toString().split('').reverse().join(''))
         })
         console.log(res);
 

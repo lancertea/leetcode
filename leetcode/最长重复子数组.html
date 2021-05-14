@@ -13,7 +13,8 @@
         // 如果 A[i-1] == B[j-1] ， 有 dp[i][j] = dp[i-1][j-1] + 1
         // 时间复杂度 O(n * m)O(n∗m)。 空间复杂度 O(n * m)O(n∗m)
 
-
+        let a = [1,2,3,2,1],
+            b = [3,2,1,4,7];
         const findLength = (A, B) => {
             const m = A.length;
             const n = B.length;
@@ -33,6 +34,7 @@
             }
             return res;
         };
+        console.log(findLength(a,b));
     </script>
 
 </body>

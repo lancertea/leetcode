@@ -28,8 +28,15 @@
             return max;
         }
 
+        function longNum1(arr) {
+            let str = arr.toString().split(',').join('');
+            let trr = str.match(/(\d)\1*/g).sort((a,b)=>b.length-a.length);
+            return trr[0].length;
+        }
+
         let arr = [1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0];
         console.log(longNum(arr));
+        console.log(longNum1(arr));
     </script>
     <!-- 
      深信服

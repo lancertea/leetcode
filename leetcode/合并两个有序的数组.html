@@ -13,20 +13,24 @@
 
 
     <script>
-    var merge =function(nums1,nums2){
-        let len1=nums1.length-1,
-         len2=nums2.length-1,
-         len=len1+len2-1;
-         while(len1>=0&&len2>=0){
-             nums1[len--]=nums1[len1]>nums2[len2]?nums1[len1--]:nums2[len2--];
-         }
-         let arrCopy=function(src,srcIndex,dest,destIndex,length){
-             dest.splice(destIndex,length,...src.slice(srcIndex,srcIndex+length));
-         }
-         arrCopy(nums2,0,nums1,0,len2+1);
+        var merge = function (nums1, nums2) {
+            let len1 = nums1.length - 1,
+                len2 = nums2.length - 1,
+                len = nums1.length + nums2.length - 1;
+            while (len1 >= 0 && len2 >= 0) {
+                nums1[len--] = nums1[len1] > nums2[len2] ? nums1[len1--] : nums2[len2--];
+            }
+            let arrCopy = function (src, srcIndex, dest, destIndex, length) {
+                dest.splice(destIndex, length, ...src.slice(srcIndex, srcIndex + length));
+            }
+            arrCopy(nums2, 0, nums1, 0, len2 + 1);
 
-    };
-      
+        };
+
+        let nums1 = [1, 2, 3],
+            nums2 = [2, 5, 6];
+        merge(nums1, nums2);
+        console.log(nums1);
     </script>
     <!-- 
      题目描述：

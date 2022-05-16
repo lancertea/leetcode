@@ -28,7 +28,7 @@
                 val: pre[0]
             }
             // 查找中序遍历中的根节点
-            for (let i = 0; i < pre.length; i++) {
+            for (let i = 0; i < vin.length; i++) {
                 if (vin[i] === treeNode.val) {
                     // 将左子树的前中序遍历分割开
                     treeNode.left = reConstructBinaryTree(pre.slice(1, i + 1), vin.slice(0, i));

@@ -55,8 +55,7 @@
                 return result;
             queue.push(root);
             while (queue.length) {
-                let temp = new TreeNode();
-                temp = queue.shift();
+                let temp = queue.shift();
                 if (temp.left != null)
                     queue.push(temp.left);
                 if (temp.right != null)
@@ -83,7 +82,7 @@
             queue1.push(root);
             while (queue1.length || queue2.length) {
                 let arr = [];
-                if (parseInt(layer % 2) != 0) {
+                if (layer % 2 !== 0) {
                     while (queue1.length) {
                         temp = queue1.shift();
                         arr.push(temp.val);
@@ -119,8 +118,7 @@
                 nextcount = 1,
                 arr = [];
             while (queue.length) {
-                let temp = new TreeNode();
-                temp = queue.shift();
+                let temp = queue.shift();
                 arr.push(temp.val);
                 count++;
                 if (temp.left != null)

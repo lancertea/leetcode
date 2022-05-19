@@ -12,32 +12,6 @@
 <body>
 
     <script>
-        var sum = function (a, b) {
-            a = Number(a);
-            b = Number(b);
-            let num = a + b,
-                res = '',
-                m = 0;
-            num = num.toString().split("");
-            for (let i = num.length - 1; i >= 0; i--) {
-                if (num[i] === '0') {
-                    res += m.toString();
-                } else if (num[i] === '1') {
-                    if ((1 + m) === 1) {
-                        res += num[i];
-                    } else {
-                        res += '0';
-                        m = 1;
-                    }
-                } else {
-                    res += '0';
-                    m = 1;
-                }
-            }
-            if (m === 1) res += '1';
-            return res.split("").reverse().join("");
-        }
-
         function sumStr(a, b) {
             a = Number(a);
             b = Number(b);
@@ -49,15 +23,15 @@
                     case 0: {
                         switch (arr[i]) {
                             case '0': {
-                                res += '0';
+                                res ='0' + res;
                                 break;
                             }
                             case '1': {
-                                res += '1';
+                                res ='1' + res;
                                 break;
                             }
                             case '2': {
-                                res += '0';
+                                res ='0' + res;
                                 m = 1;
                                 break;
                             }
@@ -67,16 +41,16 @@
                     case 1: {
                         switch (arr[i]) {
                             case '0': {
-                                res += '1';
+                                res ='1' + res;
                                 m = 0;
                                 break;
                             }
                             case '1': {
-                                res += '0';
+                                res ='0' + res;
                                 break;
                             }
                             case '2': {
-                                res += '1';
+                                res ='1' + res;
                                 break;
                             }
                         }
@@ -85,14 +59,16 @@
                 }
 
             }
-            return m === 1 ? res += '1' : res;
+            return m === 1 ? (res ='1' + res) : res;
 
         }
 
         let a = '1010',
             b = '111';
-        console.log(sum(a, b));
         console.log(sumStr(a, b));
+        let a1 = '111',
+            b1 = '111';
+        console.log(sumStr(a1, b1));
     </script>
     <!-- 
      字节一面

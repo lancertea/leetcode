@@ -46,10 +46,10 @@
         }
 
         function combine1(a, b) {
-            a = a.sort((a, b) => a - b);
-            b = b.sort((a, b) => a - b);
-            let as = a.join("").match(/([0-9])\1*/g);
-            let bs = b.join("").match(/([0-9])\1*/g);
+            a.sort((a, b) => a - b);
+            b.sort((a, b) => a - b);
+            let as = a.join("").match(/(\d)\1*/g);
+            let bs = b.join("").match(/(\d)\1*/g);
             let res = [];
             while (as.length && bs.length) {
                 if (Number(as[0][0]) < Number(bs[0][0])) {

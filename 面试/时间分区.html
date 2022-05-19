@@ -12,7 +12,7 @@
 <body>
 
     <script>
-        let t1 = '110000000000000000000000000000000000000000000000',
+        let t1 = '110000000000000000000000000000000000000000111000',
             t2 = '110010000000000000000000000000000000000000000000';
 
         function timeBitmapToRanges(time) {
@@ -32,16 +32,15 @@
                             sMinute = (s % 60).toString(),
                             tHour = Math.floor(t / 60).toString(),
                             tMinute = (t % 60).toString(),
-                            start = (sHour.length < 2 ? '0' + sHour : sHour) + ':' + (sMinute.length < 2 ? '0' +
-                                sMinute :
-                                sMinute),
-                            end = (tHour.length < 2 ? '0' + tHour : tHour) + ':' + (tMinute.length < 2 ? '0' + tMinute :
-                                tMinute),
-                            str = start + '~' + end;
+                            start =
+                            `${sHour.length < 2 ? '0' + sHour : sHour}:${sMinute.length < 2 ? '0' + sMinute : sMinute}`;
+                        end =
+                            `${tHour.length < 2 ? '0' + tHour : tHour}:${tMinute.length < 2 ? '0' + tMinute : tMinute}`;
+                        str = `${start}~${end}`;
                         range.push(str);
+                        count = 0;
                     }
-                    count = 0;
-                    point = i;
+                    point = i + 1;
                 }
             }
             return range;

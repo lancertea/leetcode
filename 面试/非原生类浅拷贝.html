@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class A {
+            constructor(f, l) {
+                this.f = f;
+                this.l = l;
+            }
+            fN(){
+                return this.f+ ' '+this.l;
+            }
+        }
+        function s(obj){
+            let n = {};
+            for(let key in obj){
+                if(obj.hasOwnProperty(key)){
+                    n[key]=obj[key];
+                }
+            }
+            n.constructor.prototype  = obj.constructor.prototype;
+            return n;
+            
+        }
+        const user = new A('h','w');
+        const newUser = s(user);
+        console.log(user);
+        console.log(newUser);
+        console.log(user instanceof A);
+        console.log(Object.getPrototypeOf(user));
+        console.log(newUser instanceof A);
+
+        // console.log([1,2,3].reduce((res,cur)=>res+cur));
+        
+    </script>
+</body>
+
+</html>

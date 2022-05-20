@@ -14,8 +14,8 @@
     <script>
         function getValueByPath(obj, path, symbol = '/') {
             let parr = path.split(symbol),
-                tmp = obj[parr[0]];
-            for (let i = 1; i < parr.length; i++) {
+                tmp = obj[arr.shift()];
+            for (let i = 0; i < parr.length; i++) {
                 if (tmp) {
                     tmp = tmp[parr[i]];
                 } else {

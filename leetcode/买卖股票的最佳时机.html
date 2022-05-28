@@ -8,7 +8,8 @@
 
 <body>
     <script>
-        //时n空1
+        //解法1:动态规划
+        // 时n空1
         let maxProfit = function (prices) {
             let max = 0,
                 minprice = prices[0]
@@ -18,8 +19,36 @@
             }
             return max
         }
+
+        //解法2:快慢指针
+        let maxProfit1 = function(prices){
+            if(!prices || prices.length < 2){
+                return 0;
+            }
+            let max = 0, left = 0, right = 1, len = prices.length;
+            while(right < len){
+                if(prices[left]< prices[right]){
+                    const m = prices[right] - prices[left];
+                    max = max > m ? max : m;
+                }else{
+                    left = right;
+                }
+                right++;
+            }
+            return max;
+        }
+
+        let a1 = [7,1,5,3,6,4],
+            a2 = [7,6,4,3,1];
+        console.log(maxProfit(a1));
+        console.log(maxProfit(a2));
+        console.log(maxProfit1(a1));
+        console.log(maxProfit1(a2));
     </script>
 
 </body>
-
+<!-- 
+    题目：
+    假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？
+ -->
 </html>

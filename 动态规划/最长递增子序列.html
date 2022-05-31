@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>最长递增子序列</title>
+</head>
+
+<body>
+    <script>
+        let a = [10, 9, 2, 5, 3, 7, 101, 18],
+            b = [0, 1, 0, 3, 2, 3];
+
+        //二分查找
+        //时间复杂度 O(nlogn)
+        let lengthOfLIS = function (nums) {
+            const top = [];
+            let n = 0;
+            for (let i = 0; i < nums.length; i++) {
+                let temp = nums[i],
+                    left = 0,
+                    right = n;
+                while (left < right) {
+                    let mid = left + ((right - left) >> 1);
+                    if (top[mid] > temp) {
+                        right = mid;
+                    } else if (top[mid] < temp) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                if (left === n) n++;
+                top[left] = temp;
+            }
+            return n;
+        };
+
+        //动态规划
+        //时间复杂度 O(n2)
+        let lengthOfLIS1 = function (nums) {
+            const dp = new Array(nums.length).fill(1);
+            for (let i = 0; i < nums.length; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (nums[i] > nums[j]) {
+                        dp[i] = Math.max(dp[i], dp[j] + 1)
+                    }
+                }
+            }
+            return Math.max(...dp);
+        };
+
+        console.log(lengthOfLIS(a));
+        console.log(lengthOfLIS(b));
+        console.log(lengthOfLIS1(a));
+        console.log(lengthOfLIS1(b));
+    </script>
+
+</body>
+<!-- 
+    题目：
+    给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。
+子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。
+例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。
+ -->
+
+</html>

@@ -16,6 +16,7 @@
         //当 node1 到达链表 headA 的末尾时，重新定位到链表 headB 的头结点；当 node2 到达链表 headB 的末尾时，
         //重新定位到链表 headA 的头结点。
         // 这样，当它们相遇时，所指向的结点就是第一个公共结点。
+        //时间复杂度：O(m+n) 空间复杂度：O(1)
         var getIntersectionNode = function (headA, headB) { //双指针
             let node1 = headA,
                 node2 = headB;
@@ -25,15 +26,20 @@
             }
             return node1;
         };
-        //方法二：
-        var getIntersectionNode = function (headA, headB) { //hashmap法
-            let map = new Map();
+
+        //方法二：hash set法
+        //时间复杂度：O(m+n) 空间复杂度：O(m)
+        var getIntersectionNode = function (headA, headB) {
+            if (!headA || !headB) {
+                return null;
+            }
+            let set = new Set();
             while (headA) {
-                map.set(headA, true);
+                set.add(headA);
                 headA = headA.next;
             }
             while (headB) {
-                if (map.has(headB)) return headB;
+                if (set.has(headB)) return headB;
                 headB = headB.next;
             }
             return null;
@@ -41,5 +47,9 @@
     </script>
 
 </body>
+<!-- 
+    题目：
+    输入两个链表，找出它们的第一个公共节点。
+ -->
 
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>从尾到头打印链表</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        let reversePrint = function (head) {
+            let res = [];
+            while (head) {
+                res.unshift(head.val);
+                head = head.next;
+            }
+            return res;
+        };
+    </script>
+    <!-- 
+     题目描述：
+  输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+     -->
+</body>
+
+</html>

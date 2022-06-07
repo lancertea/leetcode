@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>格式化金钱</title>
+</head>
+
+<body>
+    <script>
+        let s = `This bag is 123456        RMB for 2 and that                   one is only 56 RMB`;
+
+        function convertToCurrency(priceStr) {
+            priceStr = priceStr.replace(/\s{2}/g, '');
+            let reg = /(\d+)\s*RMB/g;
+            priceStr = priceStr.replace(reg, (cur, $1) => {
+                const format = (str) => str.
+                    replace(/\d{1,3}(?=(\d{3})+$)/g, content => content + ',');
+                if ($1.length < 2) {
+                    return `0.0${$1} RMB`
+                } else if ($1.length === 2) {
+                    return `0.${$1} RMB`
+                } else {
+                    let start = $1.slice(0, -2);
+                    let end = $1.slice(-2);
+                    return `${format(start)}.${end} RMB`;
+                }
+
+            });
+            return priceStr;
+
+        }
+        console.log(convertToCurrency(s));
+    </script>
+</body>
+
+</html>

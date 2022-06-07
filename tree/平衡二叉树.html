@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>平衡二叉树</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        var isBalanced = function (root){
+            let flag = true;
+            const maxDepth = (root)=>{
+                if(root === null) return 0;
+                let leftDepth = maxDepth(root.left);
+                let rightDepth = maxDepth(root.right);
+                if(Math.abs(rightDepth-leftDepth) > 1){
+                    flag = false;
+                }
+                return 1 + Math.max(leftDepth,rightDepth);
+            };
+            maxDepth(root);
+            return flag;
+
+        }
+    </script>
+
+</body>
+
+</html>

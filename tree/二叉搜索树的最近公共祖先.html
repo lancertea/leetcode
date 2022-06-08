@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>二叉搜索树的最近公共祖先</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        //递归
+        var lowestCommonAncestor = function (root, p, q) {
+            if (!root) {
+                return null;
+            }
+            if (p.val > q.val) {
+                return lowestCommonAncestor(root, q, p);
+            }
+            if (root.val >= p.val && root.val <= q.val) {
+                return root;
+            }
+            if (root.val > q.val) {
+                return lowestCommonAncestor(root.left, p, q);
+            }
+            if (root.val < p.val) {
+                return lowestCommonAncestor(root.right, p, q);
+            }
+        };
+
+        //非递归
+        var lowestCommonAncestor1 = function (root, p, q) {
+            if (!root) {
+                return null;
+            }
+            if (p.val === q.val) {
+                return p;
+            }
+            if (p.val > q.val) {
+                return lowestCommonAncestor(root, q, p);
+            }
+            while (root) {
+                if (root.val < p.val) {
+                    root = root.right;
+                } else
+                if (root.val > q.val) {
+                    root = root.left
+                } else {
+                    return root;
+                }
+            }
+
+        }
+    </script>
+    <!-- 
+     题目描述：
+   给定一个二叉搜索树（左<中<右）, 找到该树中两个指定节点的最近公共祖先
+     -->
+</body>
+
+</html>

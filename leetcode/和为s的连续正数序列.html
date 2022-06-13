@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>和为s的连续正数序列</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        var findContinuousSequence = function (target) {
+            let n = (target >> 1) + 1,
+                l = 1,
+                r = 1,
+                sum = 0,
+                res = [];
+            while(l < n){
+                debugger;
+                if(sum < target){
+                    sum += r;
+                    r++;
+                } else if(sum > target){
+                    sum -= l;
+                    l++;
+                }else{
+                    let arr = [];
+                    for(let i = l; i < r; i++){
+                        arr.push(i);
+                    }
+                    res.push(arr);
+                    sum -= l;
+                    l++;
+                }
+            }
+            return res;
+            
+        };
+
+        console.log(findContinuousSequence(9));
+    </script>
+    <!-- 
+     题目描述：
+  输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+     -->
+</body>
+
+</html>

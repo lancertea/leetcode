@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>序列化二叉树</title>
+</head>
+
+<body>
+    <script>
+        //解法1: 递归
+        var serialize = function (root) {
+            if(root == null){
+                return 'X';
+            }
+            let left = serialize(root.left);
+            let right = serialize(root.right);
+            return `${root.val},${left},${right}`;
+
+        };
+        var deserialize = function (data) {
+            if(data === 'X'){
+                return null;
+            }
+            let list = data.split(',');
+            const buildTree = (l)=>{
+                let t = l.shift();
+                if(t === 'X'){
+                    return null;
+                }
+                let node = new ListNode(t);
+                node.left = buildTree(l);
+                node.right = buildTree(l);
+                return node;
+            };
+            return buildTree(list);
+        };
+
+        //解法2:BFS
+        var serialize1 = function (root) {
+            if(root == null){
+                return 'X';
+            }
+            let res = [],
+                queue = [root];
+            while(queue.length){
+                let t = queue.shift();
+                if(t){
+                    res.push(t.val);
+                    queue.push(t.left);
+                    queue.push(t.right);
+                }else{
+                    res.push('X');
+                }
+            }
+            return res.join(',');
+        };
+        var deserialize1 = function (data) {
+            if(data === 'X'){
+                return null;
+            }
+            let list = data.split(',');
+            let root = new ListNode(list[0]),
+                queue = [root],
+                cursor = 1;
+            while(cursor < list.length){
+                let node = queue.shift(),
+                l = list[cursor],
+                r = list[cursor + 1];
+                if(l !== 'X'){
+                    let left = new ListNode(l);
+                    node.left = left;
+                    queue.push(left);
+                }
+                if(r !== 'X'){
+                    let right = new ListNode(r);
+                    node.right = right;
+                    queue.push(right);
+                }
+                cursor += 2;
+            }
+            return root;
+        };
+    </script>
+    <!-- 
+     题目描述：
+ 请实现两个函数，分别用来序列化和反序列化二叉树。
+
+     -->
+</body>
+
+</html>

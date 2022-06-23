@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>对称二叉树</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        var isSymmetric = function (root) {
+            const isSym = (r1, r2) => {
+                if (r1 === null && r2 === null) return true;
+                if (r1 === null) return false;
+                if (r2 === null) return false;
+                return (r1.val === r2.val) && isSym(r1.left, r2.right) && isSym(r1.right, r2.left);
+            }
+            if (!root) return true;
+            return isSym(root.left, root.right);
+        };
+    </script>
+    <!-- 
+     题目描述：
+   给你一个二叉树的根节点 root ， 检查它是否轴对称。
+     -->
+</body>
+
+</html>

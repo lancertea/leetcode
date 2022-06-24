@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>乘积最大子数组</title>
+</head>
+
+<body>
+    <script>
+        //时空O(mn)
+        var maxProduct = function (nums) {
+            let len = nums.length,
+                max = nums[0],
+                nowMax = 1,
+                nowMin = 1,
+                tmp;
+
+            for (let i = 0; i < len; i++) {
+                // 遇到负数，最大值 和 最小值 一定会发生互换（题解中列出所有情况的规律总结）
+                if (nums[i] < 0) {
+                    [nowMax, nowMin] = [nowMin, nowMax];
+                }
+
+                // 看乘了 nums[i] 后，还是不是最大值或最小值，是的话才乘 nums[i]
+                nowMax = Math.max(nowMax * nums[i], nums[i]);
+                nowMin = Math.min(nowMin * nums[i], nums[i]); // 维持一个最小数，因为最小数乘负数的话 肯定是最大的
+
+                // 看是否要更新返回的最大值
+                max = Math.max(nowMax, max);
+            }
+
+            return max;
+        };
+    </script>
+
+</body>
+
+</html>

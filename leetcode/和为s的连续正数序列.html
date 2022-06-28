@@ -10,8 +10,11 @@
 </head>
 
 <body>
-
-
+    <!-- 
+     题目描述：
+  输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+     -->
     <script>
         var findContinuousSequence = function (target) {
             let n = (target >> 1) + 1,
@@ -19,17 +22,16 @@
                 r = 1,
                 sum = 0,
                 res = [];
-            while(l < n){
-                debugger;
-                if(sum < target){
+            while (l < n) {
+                if (sum < target) {
                     sum += r;
                     r++;
-                } else if(sum > target){
+                } else if (sum > target) {
                     sum -= l;
                     l++;
-                }else{
+                } else {
                     let arr = [];
-                    for(let i = l; i < r; i++){
+                    for (let i = l; i < r; i++) {
                         arr.push(i);
                     }
                     res.push(arr);
@@ -38,16 +40,11 @@
                 }
             }
             return res;
-            
+
         };
 
         console.log(findContinuousSequence(9));
     </script>
-    <!-- 
-     题目描述：
-  输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
-序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
-     -->
 </body>
 
 </html>

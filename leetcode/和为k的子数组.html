@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>和为k的子数组</title>
+</head>
+<body>
+    <script>
+        var subarraySum = function (nums, k) {
+            const m = new Map();
+            m.set(0, 1);
+            let count = 0,
+                pre = 0;
+            for (const x of nums) {
+                pre += x;
+                if (m.has(pre - k)) {
+                    count += m.get(pre - k);
+                }
+                if (m.has(pre)) {
+                    m.set(pre, m.get(pre) + 1);
+                } else {
+                    m.set(pre, 1);
+                }
+            }
+            return count;
+        };
+    </script>
+    <!-- 
+     题目描述：
+   给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的子数组的个数 
+     -->
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="outer" onclick="c1(event)">
+        outer
+        <div id="middle" onclick="c2(event)">
+            middle
+            <div id="inner" onclick="c3(event)">inner</div>
+        </div>
+    </div>
+       
+
+    <script>
+    //   const oA = {
+    //       b:'str1',
+    //       d:{
+    //           b:'str2',
+    //           d:{
+    //               b:'str3'
+    //           }
+    //       }
+    //   };
+    //   const oB = oA;
+    //   oB.d.b = 'sb';
+    //   console.log(oA.d.b);
+    //   const oC = Object.assign({},oA);
+    //   console.log(oA.b);
+    //   oC.b = 'sc'
+    //   console.log(oA.b);
+    //   const oD = Object.assign(...{},...oA);
+    //   console.log(oA.d.b);
+    //   oD.d.b = 'sD';
+    //   console.log(oA.d.b);
+
+    // const foo = (...a)=>console.log(a);
+    // foo([1,2,3],4);
+    // const foo2 = (...[a])=>console.log(a);
+    // foo2([1,2,3],4);
+
+
+    // function c1(e){
+    //     console.log(e.target.id);
+    // }
+    // function c2(e){
+    //     e.stopPropagation();
+    //     console.log(e.target.id);
+    // }
+    // function c3(e){
+    //     console.log(e.target.id);
+    // }
+
+    // const oa = {a:1};
+    // const aB =[1,2,3,4];
+    // const sc = 'sc';
+    // const nd = 1;
+    // const output = (function(){
+    //     delete oa.a;
+    //     delete aB[0];
+    //     delete sc[0];
+    //     delete nd;
+    //     return [ oa.a, aB[0],sc,nd ]; 
+    // })();
+    // console.log(output);
+
+    // const v1 = {
+    //     t:10,
+    //     v:20,
+    //     b:30,
+    //     suv:40,
+    //     sedan:50,
+    // };
+
+    // class I {
+    //     vh={};
+    //     add = (type,qty)=>(this.vh[type]=qty);
+    //     sleep=(ms)=>new Promise((resolve)=>setTimeout(resolve,ms));
+    //     getvh =(vht)=>this.sleep(100).then((v)=>this.vh[vht]);
+    //     print = (vhts = Object.keys(this.vh))=>{
+    //         console.log('start print');
+    //         vhts.forEach(async(type)=>{
+    //             const vhq = await this.getvh(type);
+    //             console.log(`${type}:${vhq}`);
+    //         })
+    //         console.log('end print');
+    //     }
+    // }
+
+    // class V{
+    //     type="t";
+    //     quantity = 0;
+    //     constructor(type,qty){
+    //         if(!isNaN(qty)){
+    //             this.quantity = qty;
+    //         }
+    //         if(type){
+    //             this.type = type;
+    //         }
+    //     }
+    // }
+
+    // const inven = new I();
+    // const vs ={
+    //     suv:new V('suv',4),
+    //     sedan: new V('sedan',3),
+    //     trunk: new V(),
+    // };
+
+    // Object.values(vs).forEach(v=>{
+    //     inven.add(v.type,v.quantity)
+    // })
+    // inven.print();
+    // const local = inven.print.bind({v1});
+    // local();
+
+    </script>
+</body>
+
+</html>

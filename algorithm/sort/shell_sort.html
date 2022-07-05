@@ -16,12 +16,14 @@
         */
         //测试用例
         let a = [3, 1, 6, 2, 5, 8, 4, 7];
+        let a1 = [9, 8, 7, 6, 5, 4, 3, 2, 1]; //倒序的情况，插入排序好过希尔排序
         shell(a);
         console.log(a);
 
         //参考代码
         //初次取序列的一半为增量，以后每次减半，直到增量为1。
         function shell(arr) {
+            console.time('shell')
             for (let h = ~~(arr.length / 2); h > 0; h = ~~(h / 2)) {
                 for (let i = h; i < arr.length; i++) {
                     for (let j = i - h; j >= 0 && arr[j] > arr[j + h]; j -= h) {
@@ -29,6 +31,7 @@
                     }
                 }
             }
+            console.timeEnd('shell')
         }
     </script>
 </head>

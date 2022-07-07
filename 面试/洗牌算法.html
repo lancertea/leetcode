@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>洗牌算法</title>
+</head>
+
+<body>
+    <script>
+        function shuffle(arr) {
+            const len = arr.length;
+            for (let i = 0; i < len; i++) {
+                debugger;
+                let randomIndex = Math.floor(Math.random() * (len - i)) + i;
+                [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]]
+            }
+            return arr;
+
+        }
+
+        console.log(shuffle([1, 2, 3, 4, 5, 6, 7]));
+    </script>
+    <!-- 
+   
+     -->
+</body>
+
+</html>

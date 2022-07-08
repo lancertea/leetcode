@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>括号生成</title>
+</head>
+
+<body>
+    <!-- 
+     数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+     -->
+    <script>
+        //1.递归
+        var generateParenthesis = function (n) {
+            const res = [];
+            const generate = (str, left, right) => {
+                if (str.length === 2 * n) {
+                    res.push(str);
+                    return;
+                }
+                if (left > 0) {
+                    generate(str + '(', left - 1, right);
+                }
+                if (right > left) {
+                    generate(str + ')', left, right - 1);
+                }
+            };
+
+            generate('', n, n);
+            return res;
+        };
+
+        //2.回溯
+        var generateParenthesis = function (n) {
+            const back = (left, right, track, res) => {
+                if (left < 0 || right < 0) return;
+                if (right < left) return;
+                if (left === 0 && right === 0) {
+                    res.push(track.join(''));
+                    return;
+                }
+                track.push('(');
+                back(left - 1, right, [...track], res);
+                track.pop();
+
+                track.push(')');
+                back(left, right - 1, [...track], res);
+                track.pop();
+            };
+            if (n === 0) {
+                return [];
+            }
+            const res = [];
+            back(n, n, [], res);
+            return res;
+        };
+    </script>
+
+</body>
+
+</html>

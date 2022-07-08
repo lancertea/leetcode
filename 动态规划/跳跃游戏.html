@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>跳跃游戏</title>
+</head>
+
+<body>
+    <!-- 
+     给定一个非负整数数组 nums，最初位于数组的第一个下标，数组中的每个元素代表你在该位置可以跳跃的最大长度。
+     判断你是否能够到达最后一个下标。
+     -->
+    <script>
+        //1.动态规划 时n2 空n
+        var canJump = function (nums) {
+            const len = nums.length;
+            let dp = new Array(len).fill(false);
+            dp[0] = true;
+            for (let i = 1; i < len; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (dp[j] && nums[j] + j >= i) {
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+            return dp[len - 1];
+        };
+
+        //2.贪心 时n 空1
+        var canJump = function (nums) {
+            const len = nums.length;
+            if(len === 1) return true;
+            let cover = nums[0];
+            for(let i = 0; i <= cover; i++){
+                cover = Math.max(cover, i + nums[i]);
+                if(cover >= len - 1){
+                    return true;
+                }
+            }
+            return false;
+        };
+    </script>
+
+</body>
+
+</html>

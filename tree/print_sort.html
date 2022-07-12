@@ -1,4 +1,4 @@
-re<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -49,21 +49,22 @@ re<!DOCTYPE html>
 
         //参考代码
         function PrintFromTopToBottom(root) {
-            let queue = [],
-                result = [];
-            if (root == null)
-                return result;
-            queue.push(root);
+            if (!root) {
+                return [];
+            }
+            let res = [],
+                queue = [root];
             while (queue.length) {
                 let temp = queue.shift();
-                if (temp.left != null)
+                res.push(temp.val);
+                if (temp.left) {
                     queue.push(temp.left);
-                if (temp.right != null)
+                }
+                if (temp.right) {
                     queue.push(temp.right);
-
-                result.push(temp.val);
+                }
             }
-            return result;
+            return res;
         }
 
         //补充：分行从上到下打印二叉树

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>按之字型顺序打印二叉树</title>
+    <script>
+        //分行
+        function print(root) {
+            if (!root) {
+                return [];
+            }
+            let res = [],
+                arr = [],
+                count = 0,
+                nextCount = 1,
+                a = false;
+            queue = [root];
+            while (queue.length) {
+                let temp = queue.shift();
+                arr.push(temp.val);
+                count++;
+                if (temp.left) {
+                    queue.push(temp.left);
+                }
+                if (temp.right) {
+                    queue.push(temp.right);
+                }
+                if (count === nextCount) {
+                    count = 0;
+                    nextCount = queue.length;
+                    if (a) {
+                        arr.reverse();
+                    }
+                    res.push(arr);
+                    a = !a;
+                    arr = [];
+                }
+            }
+            return res;
+        }
+
+        //不分行
+        function print1(root) {
+            if (!root) {
+                return [];
+            }
+            let res = [],
+                stack1 = [],
+                stack2 = [],
+                a = true;
+            stack1.push(root);
+            while (stack1.length || stack2.length) {
+                if (a) {
+                    while (stack1.length) {
+                        let temp = stack1.pop();
+                        res.push(temp.val);
+                        if (temp.left) {
+                            stack2.push(temp.left);
+                        }
+                        if (temp.right) {
+                            stack2.push(temp.right);
+                        }
+                    }
+
+                } else {
+                    while (stack2.length) {
+                        let temp = stack2.pop();
+                        res.push(temp.val);
+                        if (temp.right) {
+                            stack1.push(temp.right);
+                        }
+                        if (temp.left) {
+                            stack1.push(temp.left);
+                        }
+                    }
+                }
+                a = !a;
+            }
+            return res;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

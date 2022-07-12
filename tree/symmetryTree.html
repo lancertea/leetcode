@@ -12,17 +12,16 @@
 
     <script>
         // 解法1: 递归
-        function isSymmetric(root) {
-            if (!root) {
-                return true;
+        var isSymmetric = function (root) {
+            const isSym = (r1, r2) => {
+                if (r1 === null && r2 === null) return true;
+                if (r1 === null) return false;
+                if (r2 === null) return false;
+                return (r1.val === r2.val) && isSym(r1.left, r2.right) && isSym(r1.right, r2.left);
             }
-            const check = (r1, r2) => {
-                if (!r1 && !r2) return true;
-                if (!r1 || !r2) return false;
-                return (r1.val === r2.val && check(r1.left, r2.right) && check(r1.right, r2.left))
-            }
-            return check(r.left, r.right);
-        }
+            if (!root) return true;
+            return isSym(root.left, root.right);
+        };
 
         //解法2: 迭代
         function isSymmetric1(root) {

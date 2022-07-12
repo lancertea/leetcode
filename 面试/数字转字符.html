@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>数字转字符</title>
+</head>
+
+<body>
+  <script>
+    function translateNum(num) {
+      const str = num.toString();
+      const dfs = (str, p) => {
+        if (p === str.length - 1) {
+          return 1;
+        }
+        let temp = Number(str[p] + str[p + 1]);
+        if (temp >= 10 && temp <= 25) {
+          return dfs(str, p + 1) + dfs(str, p + 2);
+        } else {
+          return dfs(str, p + 1);
+        }
+      }
+      return dfs(str, 0);
+    }
+
+    function translateNum1(num) {
+      const str = num.toString(),
+        len = str.length;
+        let res = [],
+        s = '';
+      const dfs = (str, p, arr) => {
+        if (p === len) {
+          res.push(arr.join(''));
+        } else {
+          let temp = p < len - 1 ?
+            Number(str[p] + str[p + 1]) : Number(str[p]);
+          if (temp >= 10 && temp <= 25) {
+            s = String.fromCharCode(64 + temp);
+            let t = arr.slice();
+            t.push(s);
+            dfs(str, p + 2, t);
+            s = String.fromCharCode(64 + Number(str[p]));
+            let t1 = arr.slice();
+            t1.push(s);
+            dfs(str, p + 1, t1);
+          } else {
+            s = String.fromCharCode(64 + temp);
+            arr.push(s);
+            dfs(str, p + 1, arr.slice());
+          }
+        }
+      };
+      dfs(str, 0, []);
+      return res;
+    }
+
+    console.log(translateNum1(12258));
+  </script>
+</body>
+
+</html>

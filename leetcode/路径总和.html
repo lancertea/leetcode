@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>路径总和</title>
+    <title>路径总和1/2</title>
     <style>
 
     </style>
@@ -24,6 +24,21 @@
                 }
             }
             return root ? fun(root, sum) : false;
+        };
+
+        var findPathSum = (root,sum)=>{
+            let res = [];
+            const dfs = (root,total,arr)=>{
+                total += root.val;
+                arr.push(root.val);
+                if(root.left || root.right){
+                    root.left && dfs(root.left,total,arr);
+                    root.right && dfs(root.right,total,arr);
+                } else if(total === sum){
+                    res.push(arr);
+                }
+            }
+            return root && dfs(root,0,[]) || res;
         };
     </script>
     <!-- 

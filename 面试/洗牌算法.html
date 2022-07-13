@@ -8,6 +8,33 @@
 
 <body>
     <script>
+        // 方法1：arr.sort((a,b) => Math.random() - 0.5);
+        arr.sort(() => Math.random() - 0.5); // 使用sort
+
+        // 方法2：时间复杂度 O(n^2)
+        function randomSortArray(arr) {
+            let backArr = [];
+            while (arr.length) {
+                let index = parseInt(Math.random() * arr.length);
+                backArr.push(arr[index]);
+                arr.splice(index, 1);
+            }
+            return backArr;
+        }
+
+        // 方法3：时间复杂度 O(n)
+        function randomSortArray2(arr) {
+            let lenNum = arr.length - 1;
+            let tempData;
+            for (let i = 0; i < lenNum; i++) {
+                let index = parseInt(Math.random() * (lenNum + 1 - i));
+                tempData = a[index];
+                a[index] = a[lenNum - i] // 随机选一个放在最后
+                a[lenNum - i] = tempData;
+            }
+            return arr;
+        }
+
         function shuffle(arr) {
             const len = arr.length;
             for (let i = 0; i < len; i++) {
@@ -16,7 +43,14 @@
                 [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]]
             }
             return arr;
+        }
 
+        function shuffle1(arr) {
+            const len = arr.length;
+            for (let i = len - 1; i >= 0; i--) {
+                let randomIndex = Math.floor(Math.random() * (i + 1));
+                [arr[randomIndex], arr[i]] = [arr[i], arr[randomIndex]];
+            }
         }
 
         console.log(shuffle([1, 2, 3, 4, 5, 6, 7]));

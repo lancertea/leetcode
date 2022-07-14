@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组合</title>
+</head>
+
+<body>
+    <script>
+        var combine = function (n, k) {
+            const res = [];
+            const backTrack = (idx, path) => {
+                if (path.length === k) {
+                    res.push(path.slice());
+                    return;
+                }
+                for (let i = idx; i <= n - (k - path.length) + 1; i++) {
+                    path.push(i);
+                    backTrack(i + 1, path);
+                    path.pop();
+                }
+            };
+            backTrack(1, []);
+            return res;
+        };
+    </script>
+</body>
+
+</html>

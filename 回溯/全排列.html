@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>全排列</title>
+</head>
+
+<body>
+    <!-- 给定一个不含重复数字的数组nums ，返回其所有可能的全排列 。你可以按任意顺序返回答案-->
+    <script>
+        var permute = function (nums) {
+            const len = nums.length;
+            let res = [],
+                visited = new Array(len).fill(false);
+            const backTrack = (path)=>{
+                if(path.length === len){
+                    res.push(path.slice());
+                    return;
+                }
+                for(let i = 0; i < len; i++){
+                    if(!visited[i]){
+                        path.push(nums[i]);
+                        visited[i] = true;
+                        backTrack(path);
+                        path.pop();
+                        visited[i] = false;
+                    }
+                }
+            };
+            backTrack([]);
+            return res;
+        };
+    </script>
+</body>
+
+</html>

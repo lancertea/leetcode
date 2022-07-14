@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组合之和</title>
+</head>
+
+<body>
+    <!-- 给出一组候选数 c 和一个目标数 t ，找出候选数中起来和等于 t 的所有组合 
+        同一个数字可以无限制重复被选取   时 可行解长度之和 空 目标数-->
+    <script>
+        var combinationSum = (c, t) => {
+            const res = [];
+            const dfs = (t, combine, idx) => {
+                if (idx === c.length) {
+                    return;
+                }
+                if (t === 0) {
+                    res.push(combine);
+                    return;
+                }
+                dfs(t, combine, idx + 1);
+                if (t - c[idx] >= 0) {
+                    dfs(t - c[idx], [...combine, c[idx]], idx);
+                }
+            };
+            dfs(t, [], 0)
+            return res;
+        }
+
+        var combinationSum = (c, t) => {
+            const res = [];
+            const backTrack = (idx, sum, path) => {
+                if (sum > t) return;
+                if (sum === t) {
+                    res.push(path.slice());
+                    return;
+                }
+                for (let i = idx, len = c.length; i < len; i++) {
+                    path.push(c[i]);
+                    sum += c[i];
+                    backTrack(i, sum, path);
+                    sum -= c[i];
+                    path.pop();
+                }
+            };
+            backTrack(0, 0, []);
+            return res;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>寻找两个正序数组的中位数</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        var findMedianSortedArrays = function (nums1, nums2) {
+            nums1.length > nums2.length && ([nums1, nums2] = [nums2, nums1]);
+            const n1 = nums1.length,
+                n2 = nums2.length;
+            let l = 0,
+                r = n1;
+            while (l <= r) {
+                let m1 = (l + r) >> 1,
+                    m2 = ((n1 + n2 + 1) >> 1) - m1,
+                    maxL1 = m1 === 0 ? -Infinity : nums1[m1 - 1],
+                    minL1 = m1 === n1 ? Infinity : nums1[m1],
+                    maxL2 = m2 === 0 ? -Infinity : nums2[m2 - 1],
+                    minL2 = m2 === n2 ? Infinity : nums2[m2];
+                if (maxL1 > minL2) {
+                    r = m1 - 1
+                } else if (maxL2 > minL1) {
+                    l = m1 + 1
+                } else return (n1 + n2) & 1 ? Math.max(maxL1, maxL2) : (Math.max(maxL1, maxL2) + Math.min(minL1,
+                    minL2)) / 2
+            }
+
+        };
+    </script>
+
+</body>
+
+</html>

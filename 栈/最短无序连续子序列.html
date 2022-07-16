@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>最短无序连续子序列</title>
+</head>
+
+<body>
+    <script>
+        // n 1
+        var findUnsortedSubarray = function (nums) {
+            const n = nums.length;
+            let maxn = -Number.MAX_VALUE, right = -1;
+            let minn = Number.MAX_VALUE, left = -1;
+            for (let i = 0; i < n; i++) {
+                if (maxn > nums[i]) {
+                    right = i;
+                } else {
+                    maxn = nums[i];
+                }
+                if (minn < nums[n - i - 1]) {
+                    left = n - i - 1;
+                } else {
+                    minn = nums[n - i - 1];
+                }
+            }
+            return right === -1 ? 0 : right - left + 1;
+        };
+    </script>
+</body>
+
+</html>

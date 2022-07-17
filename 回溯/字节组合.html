@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组合之和</title>
+</head>
+
+<body>
+    <!-- 给出一组候选数 c 和一个目标数 t ，找出候选数中起来和等于 t 的所有组合 
+        同一个数字可以无限制重复被选取时 可行解长度之和 空 目标数
+        2 每一个数字只能用一次-->
+    <script>
+        var combinationSum = function (candidates, target) {
+            //2 candidates.sort((a,b)=>a-b); 
+            const back = (sum, idx, arr) => {
+                if (sum > target) return;
+                if (sum === target) {
+                    res.push(arr.slice());
+                    return;
+                }
+                for (let i = idx, len = candidates.length; i < len; i++) {
+                    //2 if(i - 1 >= idx && candidates[i - 1] === candidates[i]) continue; 
+                    sum += candidates[i];
+                    arr.push(candidates[i]);
+                    back(sum, i, arr); //2 back(sum, i + 1, arr);
+                    sum -= candidates[i];
+                    arr.pop();
+                }
+
+            };
+            const res = [];
+            back(0, 0, []);
+            return res;
+        };
+    </script>
+</body>
+
+</html>

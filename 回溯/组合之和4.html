@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组合之和4</title>
+</head>
+
+<body>
+    <!-- 给出一组候选数 c 和一个目标数 t ，找出候选数中起来和等于 t 的所有组合个数
+        同一个数字可以无限制重复被选取   时 target×n 空 target-->
+    <script>
+        //dp[i] :从nums中抽取若干个数字，凑成总和为i的排列数
+        var combinationSum4 = function (nums, target) {
+            nums.sort((a, b) => a - b) // 为了下面内层循环中，用i>=nums[j]减少循环次数
+            let dp = Array(target + 1).fill(0)
+            dp[0] = 1
+            for (let i = 1; i <= target; i++) {
+                //&& i>=nums[j]，i是从nums选取数要凑的总和，如果i(1)比当前(2)的数小，那这个数(2)就凑不了(1)，所以不用考虑
+                //因为nums是排序过的，所以可以用i>=nums[j]来减少循环次数
+                for (let j = 0; j < nums.length && i >= nums[j]; j++) {
+                    dp[i] += dp[i - nums[j]]
+                }
+            }
+            return dp[target]
+        };
+    </script>
+</body>
+
+</html>

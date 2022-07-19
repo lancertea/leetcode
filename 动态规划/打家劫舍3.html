@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>打家劫舍3</title>
+</head>
+<!-- 
+     题目描述：树形
+-->
+
+<body>
+    <script>
+        const rob = (root) => {
+            const dp = new Map();
+            const helper = (root) => {
+                // 递归的出口，遍历到null节点，两种状态下收益都是0
+                if (root == null) return [0, 0];
+                const left = helper(root.left);
+                const right = helper(root.right);
+                if (!dp.has(root)) {
+                    dp.set(root, [0, 0]);
+                }
+                const res = dp.get(root);
+                res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+                res[1] = root.val + left[0] + right[0];
+                return res;
+            };
+            const res = helper(root);
+            return Math.max(res[0], res[1]);
+        };
+
+        const rob1 = (root) => {
+            const helper = (root) => {
+                if (root == null) return [0, 0];
+                const left = helper(root.left);
+                const right = helper(root.right);
+                robExcludeRoot = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+                robIncludeRoot = root.val + left[0] + right[0];
+                return [robExcludeRoot, robIncludeRoot];
+            };
+            const res = helper(root);
+            return Math.max(res[0], res[1]);
+        };
+
+
+    </script>
+
+</body>
+
+</html

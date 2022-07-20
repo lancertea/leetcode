@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组中的第k个最大元素</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <script>
+      var findKthLargest = function(nums, k) {
+        const heap = (a,size,index)=>{
+            let large = index,
+                l = 2 * index + 1,
+                r = 2 * index + 2;
+            if(l < size && a[large] < a[l]){
+                large = l;
+            }
+            if(r < size && a[large] < a[r]){
+                large = r;
+            }
+            if(large !== index){
+                [a[large], a[index]] = [a[index], a[large]];
+                heap(a,size,large);
+            }
+        }
+        const len = nums.length;
+        for(let i = len >> 1 - 1; i >= 0; i--){
+            heap(nums,len,i);
+        }
+        for(let i = len - 1; i >= len - k; i--){
+            [nums[i],nums[0]] = [nums[0], nums[i]];
+            heap(nums,i,0);
+        }
+        return nums[len - k];
+};
+    </script>
+    <!-- 
+     题目描述：
+    给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素
+     -->
+</body>
+
+</html>

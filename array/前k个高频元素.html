@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>前k个高频元素</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <script>
+        var topKFrequent = function (nums, k) {
+            let m = new Map();
+            for (let i = 0, len = nums.length; i < len; i++) {
+                let c = m.has(nums[i]) ? m.get(nums[i]) + 1 : 1;
+                m.set(nums[i], c);
+            }
+            if (m.size < k) {
+                return [...m.keys()];
+            }
+            //优化点：
+            let arr = Array.from(m).sort((a, b) => b[1] - a[1]),
+                res = [];
+            for (let i = 0; i < k; i++) {
+                res.push(arr[i][0]);
+            }
+            return res;
+        };
+
+        //堆排序
+        var topKFrequent1 = function (nums, k) {
+            const heapSortK = (arr) => {
+                const heap = (arr, size, index) => {
+                    let largest = index,
+                        left = 2 * index + 1,
+                        right = 2 * index + 2;
+                    if (left < size && arr[left][1] > arr[largest][1]) {
+                        largest = left;
+                    }
+                    if (right < size && arr[right][1] > arr[largest][1]) {
+                        largest = right;
+                    }
+                    if (largest != index) {
+                        [arr[largest], arr[index]] = [arr[index], arr[largest]];
+                        heap(arr, size, largest);
+                    }
+                }
+                const len = arr.length;
+                let res = [];
+                for(let i = len >> 1 - 1; i >= 0; i--){
+                    heap(arr, len, i);
+                }
+                for(let i = len - 1; i >= len - k; i--){
+                    res.push(arr[0][0]);
+                    [arr[i], arr[0]] = [arr[0], arr[i]];
+                    heap(arr,i,0);
+                }
+                return res;
+            };
+            let m = new Map();
+            for (let i = 0, len = nums.length; i < len; i++) {
+                let c = m.has(nums[i]) ? m.get(nums[i]) + 1 : 1;
+                m.set(nums[i], c);
+            }
+            if (m.size < k) {
+                return [...m.keys()];
+            }
+            //优化点：
+            let arr = Array.from(m);
+                return heapSortK(arr);
+
+        };
+
+        let arr = [3, 0, 1, 0];
+        console.log(topKFrequent1(arr, 1));
+    </script>
+    <!-- 
+     题目描述：
+   给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
+     -->
+</body>
+
+</html>

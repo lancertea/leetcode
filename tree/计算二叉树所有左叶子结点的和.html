@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>计算二叉树所有左叶子结点的和</title>
+
+</head>
+
+<body>
+    <script>
+        // const leftSum = root =>{
+        //     let sum = 0;
+        //     let help = (root) =>{
+        //         if(!root) return;
+        //         if(root && root.left){
+        //             let temp = root.left;
+        //             if(temp.left === null && temp.right === null){
+        //                 sum += temp.val;
+        //             }         
+        //         }
+        //         return help(root.left);
+        //     }
+        //     if(root){
+        //         help(root.left);
+        //         help(root.right);
+        //     }
+        //     return sum;
+        // }
+
+        function TreeNode(val) {
+            this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+
+        const r1 = new TreeNode(1);
+        const r2 = new TreeNode(2);
+        const r3 = new TreeNode(3);
+        const r4 = new TreeNode(4);
+        const r5 = new TreeNode(5);
+        const r6 = new TreeNode(6);
+        const r7 = new TreeNode(7);
+        r1.left = r2;
+        r1.right = r3;
+        r2.left = r4;
+        r3.left = r5;
+        r5.left = r6;
+        r5.right = r7;
+        const leftSum = root => {
+            let stack = [],
+                res = 0,
+                cur = root;
+            while (cur || stack.length) {
+                //1
+                while (cur) {
+                    stack.push(cur);
+                    cur = cur.left;
+                    // cur = null
+                }
+                cur = stack.pop();
+                //叶节点
+                const parent = stack[stack.length - 1];
+                const isLeft = parent && (parent.left === cur) && (cur.left === null) && (cur.right === null)
+                if (isLeft) {
+                    res += cur.val;
+                }
+                cur = cur.right;
+            }
+            return res;
+        }
+
+        console.log(leftSum(r1));
+    </script>
+</body>
+
+</html>

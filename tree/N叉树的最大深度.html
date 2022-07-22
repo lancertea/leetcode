@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>不同的二叉搜索树</title>
+</head>
+<!-- 
+     题目描述: 给定一个 N 叉树，找到其最大深度。
+-->
+<body>
+    <script>
+        var maxDepth = function (root) {
+            if (!root) {
+                return 0;
+            }
+            let maxChildDepth = 0;
+            const children = root.children;
+            for (const child of children) {
+                const childDepth = maxDepth(child);
+                maxChildDepth = Math.max(maxChildDepth, childDepth);
+            }
+            return maxChildDepth + 1;
+        };
+    </script>
+
+</body>
+
+</html>

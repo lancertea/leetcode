@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>二叉树展开为链表</title>
+</head>
+<!-- 
+     题目描述: 将二叉树按前序展开为链表，空间为1
+-->
+
+<body>
+    <script>
+        //时n, 空n
+        var flatten = root => {
+            if (!root) return;
+            const stack = [root];
+            let pre = null;
+            while (stack.length) {
+                const cur = stack.pop();
+                if (pre) {
+                    pre.left = null;
+                    pre.right = cur;
+                }
+                if (cur.right) {
+                    stack.push(cur.right);
+                }
+                if (cur.left) {
+                    stack.push(cur.left);
+                }
+                pre = cur;
+            }
+        }
+
+        //时n 空1
+        var flatten = root => {
+            let cur = root;
+            while (cur) {
+                if (cur.left) {
+                    const next = cur.left;
+                    let pre = next;
+                    while (pre.right) {
+                        pre = pre.right;
+                    }
+                    pre.right = cur.right;
+                    cur.left = null;
+                    cur.right = next;
+                }
+                cur = cur.right;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

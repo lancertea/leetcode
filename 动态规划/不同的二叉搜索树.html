@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>不同的二叉搜索树</title>
+</head>
+</head>
+<!-- 
+     题目描述
+给你一个整数 n ，求恰由n个节点组成且节点值从1到n互不相同的二叉搜索树有多少种？
+返回满足题意的二叉搜索树的种数。
+-->
+<body>
+    <script>
+        //动态规划：时n2
+        var numTrees = function(n){
+            let dp = new Array(n+1).fill(0);
+            dp[0] = 1;
+            dp[1] = 1;
+            for(let i = 2; i <= n; i++){
+                for(let j = 0; j < i; j++){
+                    dp[i] += dp[j]*dp[i - j - 1];
+                }
+            }
+            return dp[n];
+        };
+
+        //记忆化递归
+        var numTrees1 = function(n){
+            const memo = new Array(n + 1);
+            const recur = n =>{
+                if(n === 0 || n === 1){
+                    return 1;
+                }
+                if(memo[n]){
+                    return memo[n];
+                }
+                let sum = 0;
+                for(let i = 0; i <= n - 1; i++){
+                    sum += recur(i)*recur(n-i-1);
+                }
+                memo[n] = sum;
+                return sum;
+            }
+            return recur(n);
+        }
+
+    </script>
+
+</body>
+
+</html>

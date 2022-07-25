@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>数组中的第k个最大元素</title>
@@ -9,32 +10,97 @@
 
 <body>
     <script>
-      var findKthLargest = function(nums, k) {
-        const heap = (a,size,index)=>{
-            let large = index,
-                l = 2 * index + 1,
-                r = 2 * index + 2;
-            if(l < size && a[large] < a[l]){
-                large = l;
+        //不考虑时间 冒泡
+        var findKthLargest = function (nums, k) {
+            const len = nums.length;
+            for (let i = 1; i <= k; i++) {
+                for (let j = 0; j < len - i; j++) {
+                    if (nums[j] > nums[j + 1]) {
+                        [nums[j], nums[j + 1]] = [nums[j + 1], nums[j]];
+                    }
+                }
             }
-            if(r < size && a[large] < a[r]){
-                large = r;
+            return nums[len - k];
+        };
+
+
+        //堆排序
+        var findKthLargest = function (nums, k) {
+            const heap = (a, size, index) => {
+                let large = index,
+                    l = 2 * index + 1,
+                    r = 2 * index + 2;
+                if (l < size && a[large] < a[l]) {
+                    large = l;
+                }
+                if (r < size && a[large] < a[r]) {
+                    large = r;
+                }
+                if (large !== index) {
+                    [a[large], a[index]] = [a[index], a[large]];
+                    heap(a, size, large);
+                }
             }
-            if(large !== index){
-                [a[large], a[index]] = [a[index], a[large]];
-                heap(a,size,large);
+            const len = nums.length;
+            for (let i = len >> 1 - 1; i >= 0; i--) {
+                heap(nums, len, i);
             }
-        }
-        const len = nums.length;
-        for(let i = len >> 1 - 1; i >= 0; i--){
-            heap(nums,len,i);
-        }
-        for(let i = len - 1; i >= len - k; i--){
-            [nums[i],nums[0]] = [nums[0], nums[i]];
-            heap(nums,i,0);
-        }
-        return nums[len - k];
-};
+            for (let i = len - 1; i >= len - k; i--) {
+                [nums[i], nums[0]] = [nums[0], nums[i]];
+                heap(nums, i, 0);
+            }
+            return nums[len - k];
+        };
+
+        //快排
+        var findKthLargest1 = function (nums, k) {
+            const len = nums.length;
+            const quick = (arr, left, right, k) => {
+                const partition = (arr, left, right) => {
+                    // 取中间项为基准
+                    let datum = arr[Math.floor(Math.random() * (right - left + 1)) + left],
+                        i = left,
+                        j = right
+                    while (i < j) {
+                        // 左指针右移
+                        while (arr[i] < datum) {
+                            i++
+                        }
+                        // 右指针左移
+                        while (arr[j] > datum) {
+                            j--
+                        }
+                        // 交换
+                        if (i < j) {
+                            [arr[i], arr[j]] = [arr[j], arr[i]];
+                        }
+                        // 当数组中存在重复数据时，即都为datum，但位置不同
+                        // 继续递增i，防止死循环
+                        if (arr[i] === arr[j] && i !== j) {
+                            i++
+                        }
+                    }
+                    return i
+                }
+                let idx;
+                if (left < right) {
+                    // 划分数组
+                    idx = partition(arr, left, right)
+                    // Top k
+                    if (k === len - idx) {
+                        return arr[idx]
+                    } else if (k > len - idx) {
+                        // Top k 在左边
+                        return quick(arr, left, idx - 1, k)
+                    } else {
+                        // Top k 在右边
+                        return quick(arr, idx + 1, right, k)
+                    }
+                }
+                return arr[left]
+            }
+            return quick(nums, 0, len - 1, k)
+        };
     </script>
     <!-- 
      题目描述：

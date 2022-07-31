@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>最长有效的括号</title>
+</head>
+
+<body>
+    <script>
+        var longestValidParentheses = function (s) {
+            let max = 0,
+                stack = [-1];
+            for (let i = 0, len = s.length; i < len; i++) {
+                if (s[i] == '(') {
+                    stack.push(i);
+                } else {
+                    stack.pop();
+                    if (stack.length) {
+                        const cur = i - stack[stack.length - 1];
+                        max = Math.max(cur, max);
+                    } else {
+                        stack.push(i);
+                    }
+                }
+            }
+            return max;
+        }
+    </script>
+
+</body>
+
+</html>

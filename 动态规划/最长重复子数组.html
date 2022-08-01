@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>最长重复子数组</title>
+</head>
+
+<body>
+    <!-- 返回两个数组中公共的 、长度最长的子数组的长度-->
+    <script>
+        //dp[i][j]长度为i，末尾项为A[i-1]的子数组，与长度为j，末尾项为B[j-1]的子数组
+        //二者的最大公共后缀子数组长度
+        var findLength = function (nums1, nums2) {
+            const m = nums1.length, n = nums2.length;
+            const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+            let res = 0;
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    if (nums1[i - 1] === nums2[j - 1]) {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                    }
+                    res = Math.max(dp[i][j], res);
+                }
+            }
+            return res;
+        };
+    </script>
+
+</body>
+
+</html>

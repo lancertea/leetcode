@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>字节买卖股票</title>
+</head>
+
+<body>
+    <!-- 在每一天，你可以决定是否购买和/或出售股票。你在任何时候最多只能持有一股
+        你也可以先购买，然后在同一天出售-->
+    <script>
+        var maxProfit = function (prices) {
+            const len = prices.length;
+            if (len < 2) {
+                return 0;
+            };
+            let dp = Array.from({ length: len }, () => []);
+            dp[0] = [0, -prices[0]];
+            //冷冻期
+            //dp[1][0] = Math.max(0, prices[1] - prices[0]);
+            //dp[1][1] = Math.max(dp[0][1], dp[0][0] - prices[1]);
+            for (let i = 1; i < len; i++) {
+                //昨天没有 + 昨天有，今天卖了
+                dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+                //含手续费 
+                //dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee);
+
+                //昨天也有 + 昨天卖了，今天买了
+                dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+                //冷冻期
+                //dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]);
+            }
+            return dp[len - 1][0];
+        }
+    </script>
+</body>
+
+</html>

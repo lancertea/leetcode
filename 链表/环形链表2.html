@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>环形链表2</title>
+</head>
+
+<body>
+    <!-- 找出链表的环 -->
+    <script>
+        var detectCycle = function (head) {
+            if (!head) return null;
+            let f = head, s = head;
+            while (f) {
+                if (!f.next) return null;
+                f = f.next.next;
+                s = s.next;
+                if (f === s) {
+                    let p = head;
+                    while (p !== s) {
+                        p = p.next;
+                        s = s.next;
+                    }
+                    return p;
+                }
+            }
+        };
+    </script>
+
+</body>
+
+</html>

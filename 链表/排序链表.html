@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>排序链表</title>
+</head>
+
+<body>
+    <script>
+        var sortList = function (head) {
+            const merge = (l, r) => {
+                let res = new ListNode(-1), cur = res;
+                while (l && r) {
+                    if (l.val < r.val) {
+                        cur.next = l;
+                        l = l.next;
+                    } else {
+                        cur.next = r;
+                        r = r.next;
+                    }
+                    cur = cur.next;
+                }
+                if (l) cur.next = l;
+                if (r) cur.next = r;
+                return res.next;
+            }
+            if (!head || !head.next) return head;
+            let s = head, f = head, pre = null;
+            while (f && f.next) {
+                pre = s;
+                s = s.next;
+                f = f.next.next;
+            }
+            pre.next = null;
+            const l = sortList(head), r = sortList(s);
+            return merge(l, r);
+        };
+    </script>
+
+</body>
+
+</html>

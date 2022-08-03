@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>环形链表</title>
+</head>
+
+<body>
+    <!-- 判断一个链表是否有环 -->
+    <script>
+        var hasCycle = function (head) {
+            if(!head) return false;
+            let f = head, s = head;
+            while(f){
+                if(!f.next) return false;
+                f = f.next.next;
+                s = s.next;
+                if(f === s) return true;
+            }
+            return false;
+        }
+    </script>
+
+</body>
+
+</html>

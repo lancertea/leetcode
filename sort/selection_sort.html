@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>选择排序</title>
     <script>
-        /*
+      /*
              升序：
              从数组中选择最小元素，将它与数组的第一个元素交换位置。再从数组剩下的元素中选择出最小的元素，
              将它与数组的第二个元素交换位置。不断进行这样的操作，直到将整个数组排序。
@@ -14,28 +13,58 @@
             最差\最优、平均时间复杂度均为O(n^2)
             空间复杂度O(1)
              */
-        //测试用例
-        let a = [3, 1, 6, 2, 5, 8, 4, 7];
-        select(a);
-        console.log(a);
+      //测试用例
+      let a = [3, 1, 6, 2, 5, 8, 4, 7];
+      select(a);
+      console.log(a);
 
-        //参考代码
-        function select(arr) {
-            //选择次数  
-            for (let i = 0; i < arr.length - 1; i++) {
-                let minIndex = i;
-                for (let j = i + 1; j < arr.length; j++) {
-                    minIndex = arr[j] < arr[minIndex] ? j : minIndex;
-                }
-                if(minIndex!=i)
-                [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+      //参考代码
+      function select(arr) {
+        const len = arr.length;
+        let minIndex;
+        for (let i = 0; i < len - 1; i++) {
+          minIndex = i;
+          for (let j = i + 1; j < len; j++) {
+            if (arr[minIndex] > arr[j]) {
+              minIndex = j;
             }
+          }
+          if (minIndex != i) {
+            [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+          }
         }
+        return arr;
+      }
+
+      function stableSelect(arr) {
+        const len = arr.length;
+
+        for (let i = 0; i < len - 1; i++) {
+          let minIndex = i;
+
+          // 找到未排序区间的最小元素
+          for (let j = i + 1; j < len; j++) {
+            if (arr[j] < arr[minIndex]) {
+              minIndex = j;
+            }
+          }
+
+          // 如果最小元素不是当前位置，进行“移位插入”
+          if (minIndex !== i) {
+            const minValue = arr[minIndex];
+            // 把 i 到 minIndex-1 的元素整体后移
+            for (let k = minIndex; k > i; k--) {
+              arr[k] = arr[k - 1];
+            }
+            // 插入最小值
+            arr[i] = minValue;
+          }
+        }
+
+        return arr;
+      }
     </script>
-</head>
+  </head>
 
-<body>
-
-</body>
-
+  <body></body>
 </html>

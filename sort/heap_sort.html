@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>堆排序</title>
     <script>
-        /*
+      /*
           堆排序是一种选择排序，堆是具有以下性质的完全二叉树：每个结点的值都大于或等于其左右孩子结点的值，称为大顶堆；或者每个结点的值都小于或等于其左右孩子结点的值，称为小顶堆。
           a.将无需序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆;
 　　      b.将堆顶元素与末尾元素交换，将最大元素"沉"到数组末端;
@@ -15,44 +14,40 @@
         最坏，最好，平均时间复杂度均为O(nlogn)
         空间复杂度O(1)
              */
-        //测试用例
-        let a = [3, 1, 6, 2, 5, 8, 4, 7];
-        heapSort(a)
-        console.log(a);
-        
+      //测试用例
+      let a = [3, 1, 6, 2, 5, 8, 4, 7];
+      heapSort(a);
+      console.log(a);
 
-        //参考代码
-        function heapSort(a) {
-            //从最后一个非叶子节点开始，从左至右，从下至上进行调整
-            for (let i = Math.floor(a.length / 2 - 1); i >= 0; i--) {
-                heap(a, a.length, i);
-            }
-            for (let i = a.length - 1; i > 0; i--) {
-                [a[i], a[0]] = [a[0], a[i]];
-                heap(a, i, 0);
-            }
+      //参考代码
+      function heap(arr, size, index) {
+        let largest = index,
+          left = 2 * index + 1,
+          right = 2 * index + 2;
+        if (left < size && arr[left] > arr[largest]) {
+          largest = left;
         }
-
-        function heap(arr, size, index) {
-            let largest = index,
-                left = 2 * index + 1,
-                right = 2 * index + 2;
-            if (arr[left] > arr[largest] && left < size) {
-                largest = left;
-            }
-            if (arr[right] > arr[largest] && right < size) {
-                largest = right;
-            }
-            if (largest != index) {
-                [arr[largest], arr[index]] = [arr[index], arr[largest]];
-                heap(arr, size, largest);
-            }
+        if (right < size && arr[right] > arr[largest]) {
+          largest = right;
         }
+        if (largest != index) {
+          [arr[largest], arr[index]] = [arr[index], arr[largest]];
+          heap(arr, size, largest);
+        }
+      }
+      function heapSort(arr) {
+        const len = arr.length;
+        for (let i = len >> (1 - 1); i >= 0; i--) {
+          heap(arr, len, i);
+        }
+        for (let i = len - 1; i >= 0; i--) {
+          [arr[i], arr[0]] = [arr[0], arr[i]];
+          heap(arr, i, 0);
+        }
+        return arr;
+      }
     </script>
-</head>
+  </head>
 
-<body>
-
-</body>
-
+  <body></body>
 </html>

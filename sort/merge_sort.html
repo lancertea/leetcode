@@ -94,6 +94,31 @@
         /*
         参考：https://www.cnblogs.com/wuguanglin/p/mergeSort.html
         */
+
+        //gpt
+        {
+            function mergeSort(arr) {
+                if (arr.length <= 1) return arr;
+
+                const mid = arr.length >> 1;
+                const left = mergeSort(arr.slice(0, mid));
+                const right = mergeSort(arr.slice(mid));
+
+                return merge(left, right);
+            }
+
+            function merge(left, right) {
+                const res = [];
+                let i = 0, j = 0;
+
+                while (i < left.length && j < right.length) {
+                    res.push(left[i] < right[j] ? left[i++] : right[j++]);
+                }
+                return res.concat(left.slice(i)).concat(right.slice(j));
+            }
+        }
+
+
     </script>
 </head>
 

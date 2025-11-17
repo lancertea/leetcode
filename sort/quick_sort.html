@@ -110,24 +110,50 @@
         }
 
 
-        //阮一峰老师的做法：
+        // 简单版
         function quickSort(arr) {
             if (arr.length <= 1)
                 return arr;
-            var pivotIndex = Math.floor(arr.length / 2),
-                pivot = arr.splice(pivotIndex, 1)[0],
+            const pivot = arr[arr.length >> 1],
                 left = [],
                 right = [];
-            for (var i = 0; i < arr.length; i++) {
-                if (arr[i] < pivot) {
-                    left.push(arr[i]);
-                } else {
-                    right.push(arr[i]);
+            for (let v of arr) {
+                if (v < p) {
+                    left.push(v)
+                }
+                if (v > p) {
+                    right.push(v)
                 }
             }
             return quickSort(left).concat([pivot], quickSort(right));
-
         }
+
+        // 原地快排
+        function quickSort1(arr, left = 0, right = arr.length - 1) {
+            if (left >= right) return arr;
+
+            const pivotIndex = partition1(arr, left, right);
+            quickSort1(arr, left, pivotIndex - 1);
+            quickSort1(arr, pivotIndex + 1, right);
+
+            return arr;
+        }
+
+        function partition1(arr, left, right) {
+            const pivot = arr[right];   // 用最后一个点作为 pivot
+            let i = left - 1;
+
+            for (let j = left; j < right; j++) {
+                if (arr[j] < pivot) {
+                    i++;
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+            }
+            // 最后把 pivot 放到正确位置
+            [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+            return i + 1;
+        }
+
     </script>
 </head>
 

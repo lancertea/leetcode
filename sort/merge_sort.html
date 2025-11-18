@@ -108,13 +108,16 @@
             }
 
             function merge(left, right) {
-                const res = [];
+                const res = [], l = left.length, r = right.length;
                 let i = 0, j = 0;
-
-                while (i < left.length && j < right.length) {
-                    res.push(left[i] < right[j] ? left[i++] : right[j++]);
+                while (i < l && j < r) {
+                    if (left[i] < right[j]) {
+                        res.push(left[i++])
+                    } else {
+                        res.push(right[j++])
+                    }
                 }
-                return res.concat(left.slice(i)).concat(right.slice(j));
+                return res.concat(left.slice(i), right.slice(j))
             }
         }
 

@@ -9,9 +9,65 @@
 
 <body>
   <script>
+    function TreeNode(x) {
+      this.val = x;
+      this.left = null;
+      this.right = null;
+    }
+    //测试用例
+    let Tree1 = new TreeNode(1);
+    let a1 = new TreeNode(2);
+    Tree1.left = a1;
+    let b1 = new TreeNode(3);
+    Tree1.right = b1;
+    let c1 = new TreeNode(4);
+    a1.left = c1;
+    let d1 = new TreeNode(5);
+    a1.right = d1;
+    let e1 = new TreeNode(6);
+    c1.right = e1;
+
+    let Tree2 = new TreeNode(1);
+
+    let Tree3 = null;
+
     let a = [3, 1, 6, 2, 5, 8, 4, 7];
 
-    console.log(i(a))
+
+  function m(root, res=[]){
+    if(root){
+      m(root.left,res)
+      m(root.right,res)
+      res.push(root.val)
+    }
+    return res
+  }
+
+  function m1(root){
+    const res = [],
+    stack = [];
+    let cur = root,
+    last = null;
+    while(cur || stack.length){
+      while(cur){
+        stack.push(cur)
+        cur = cur.left
+      }
+      cur = stack[stack.length - 1]
+      if(!cur.right || cur.right === last){
+        cur = stack.pop()
+        res.push(cur.val)
+        last = cur
+        cur = null
+      }else {
+        cur = cur.right
+      }
+    }
+    return res
+  }
+
+  console.log(m(Tree1))
+  console.log(m1(Tree1))
   </script>
 </body>
 

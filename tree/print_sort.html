@@ -53,9 +53,10 @@
                 return [];
             }
             let res = [],
-                queue = [root];
+                queue = [root],
+                temp = null;
             while (queue.length) {
-                let temp = queue.shift();
+                temp = queue.shift();
                 res.push(temp.val);
                 if (temp.left) {
                     queue.push(temp.left);
@@ -122,9 +123,9 @@
                 let temp = queue.shift();
                 arr.push(temp.val);
                 count++;
-                if (temp.left != null)
+                if (temp.left)
                     queue.push(temp.left);
-                if (temp.right != null)
+                if (temp.right)
                     queue.push(temp.right);
                 if (count === nextcount) {
                     result.push(arr);

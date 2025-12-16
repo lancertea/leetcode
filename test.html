@@ -32,42 +32,12 @@
     let Tree3 = null;
 
     let a = [3, 1, 6, 2, 5, 8, 4, 7];
+    let b = [1, 2, 3, 4, 5, 6, 7, 8]
+
+    let pre = [1, 2, 4, 7, 3, 5, 6, 8];
+    let vin = [4, 7, 2, 1, 5, 3, 8, 6];
 
 
-  function m(root, res=[]){
-    if(root){
-      m(root.left,res)
-      m(root.right,res)
-      res.push(root.val)
-    }
-    return res
-  }
-
-  function m1(root){
-    const res = [],
-    stack = [];
-    let cur = root,
-    last = null;
-    while(cur || stack.length){
-      while(cur){
-        stack.push(cur)
-        cur = cur.left
-      }
-      cur = stack[stack.length - 1]
-      if(!cur.right || cur.right === last){
-        cur = stack.pop()
-        res.push(cur.val)
-        last = cur
-        cur = null
-      }else {
-        cur = cur.right
-      }
-    }
-    return res
-  }
-
-  console.log(m(Tree1))
-  console.log(m1(Tree1))
   </script>
 </body>
 

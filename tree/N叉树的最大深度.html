@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>N叉树的最大深度</title>
@@ -7,11 +8,15 @@
 <!-- 
      题目描述: 给定一个 N 叉树，找到其最大深度。
 -->
+
 <body>
     <script>
-        var maxDepth = function (root) {
+        const maxDepth = function (root) {
             if (!root) {
                 return 0;
+            }
+            if (!root.children) {
+                return 1;
             }
             let maxChildDepth = 0;
             const children = root.children;
@@ -22,20 +27,35 @@
             return maxChildDepth + 1;
         };
 
-          //最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
-          var minDepth = function (root) {
-            if (root == null) {
+        //最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+        const minDepth = function (root) {
+            if (!root) {
                 return 0;
             }
-            if (root.left == null && root.right == null) {
+            if (!root.left && !root.right) {
                 return 1;
             }
             let ans = Infinity;
-            if (root.left != null) {
+            if (root.left) {
                 ans = Math.min(minDepth(root.left), ans);
             }
-            if (root.right != null) {
+            if (root.right) {
                 ans = Math.min(minDepth(root.right), ans);
+            }
+            return ans + 1;
+        };
+
+
+        const minDepthN = function (root) {
+            if (!root) {
+                return 0;
+            }
+            if (!root.children) {
+                return 1;
+            }
+            let ans = Infinity;
+            for (const v of root.children) {
+                ans = Math.min(minDepth(v), ans)
             }
             return ans + 1;
         };

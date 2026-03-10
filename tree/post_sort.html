@@ -13,11 +13,10 @@
     <script>
         //递归实现
         function post(root, res = []) {
-            if (root) {
-                post(root.left, res);
-                post(root.right, res);
-                res.push(root.val);
-            }
+            if (!root) return res
+            post(root.left, res);
+            post(root.right, res);
+            res.push(root.val);
             return res;
         }
 

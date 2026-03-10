@@ -13,11 +13,10 @@
     <script>
         //递归实现
         function pre(root, res = []) {
-            if (root) {
-                res.push(root.val);
-                pre(root.left, res);
-                pre(root.right, res);
-            }
+            if (!root) return res
+            res.push(root.val);
+            pre(root.left, res);
+            pre(root.right, res);
             return res;
         }
 
